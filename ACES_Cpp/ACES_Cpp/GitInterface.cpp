@@ -27,8 +27,8 @@ void gitCommit()
 	system("git add -A");
 	system(commitCommand.c_str());
 
-	//clean up
-	delete timeinfo;
+	//clean up - throws an exception when timeinfo is deleted
+	//delete timeinfo;
 }
 
 
