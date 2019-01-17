@@ -28,7 +28,7 @@ void gitCommit()
 	system(commitCommand.c_str());
 
 	//clean up
-	delete timeinfo;
+	//delete timeinfo;
 }
 
 
