@@ -1,42 +1,29 @@
-#include <stdio.h> 
-#include <stdlib.h>
-//#ifndef GIT_INTERFACE_H
-//#define GIT_INTERFACE_H
+#define _CRT_SECURE_NO_WARNINGS 0
 
-//class GitInterface
-//{
-//	void gitCommit();
-//
-//
-//};
-//
-//#endif // !GIT_INTERFACE_H
-//
-//
-////#include <io.h>
-//
-//static void runGit()
-//{
-//	
-////#ifdef _WIN32
-//
-////#elif _WIN64
-//
-////#elif __unix || __unix__
-//
-////#elif __APPLE__ || __MACH__
-//
-////#elif __linux__
-//
-////#else
-//
-//#endif	
-//}
+#include <stdlib.h>
+#include <time.h> 
+#include <string>
+
 
 void gitCommit()
 {
+	//get the time in string form
+	time_t rawtime;
+	struct tm * timeinfo;
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	std::string tempTime = asctime(timeinfo);
+
+	//now we have to trim the /n off the end of the string
+	tempTime = tempTime.substr(0, tempTime.size() - 1);
+
+	std::string commitCommand = "git commit -m \"" +tempTime;
+	commitCommand += "\"";
+	//run commmands on the cmd line
 	system("git add -A");
-	system("git commit -m \"Test Commit\"");
+	//system("git commit -m \"" + my_time + "\"");
+	system(commitCommand.c_str());
 }
 
 
