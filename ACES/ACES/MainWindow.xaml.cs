@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,25 @@ namespace ACES
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        ObservableCollection<Class> classList = new ObservableCollection<Class>();
+
         public MainWindow()
         {
             InitializeComponent();
+            GetClassList();
+            SaveClassList();
+            //dropDown name: .ItemsSource  = classList; 
+        }
+
+        private void SaveClassList()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GetClassList()
+        {
+            throw new NotImplementedException();
         }
     }
 }
