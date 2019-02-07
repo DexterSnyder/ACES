@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,12 +35,56 @@ namespace ACES
 
         private void SaveClassList()
         {
-            throw new NotImplementedException();
+            // create a default path that is only used in the program. 
+            string path = "classlist.csv";
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    // write all data to the file. 
+                    foreach (Class current in classList)
+                    {
+                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                    }
+
+                }
+            }
+            else
+            {
+                // empty file if it exists 
+                File.WriteAllText(path, "");
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    // write all data to the file. 
+                    foreach (Class current in classList)
+                    {
+                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                    }
+                }
+            }
         }
 
         private void GetClassList()
         {
-            throw new NotImplementedException();
+            // create a default path that is only used in the program. 
+            string path = "classlist.csv";
+
+            if (File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    string currentLine = "";
+                    while ((currentLine = sr.ReadLine()) != null)
+                    {
+                        string[] items = currentLine.Split(',');
+                        classList.Add(new Class(items[0], items[1]));
+                    }
+
+                }
+            }
         }
     }
 }

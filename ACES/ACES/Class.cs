@@ -11,15 +11,17 @@ namespace ACES
         List<Student> Students = new List<Student>();
 
         string NameOfOrgansation;
+        string RosterLocation;
 
-        public Class(string nameOfOrgansation)
+        public Class(string nameOfOrgansation, string rosterLocation)
         {
             NameOfOrgansation = nameOfOrgansation;
+            RosterLocation = rosterLocation; 
         }
 
-        public void GetStudentsFromRoster(string fileLocation)
+        public void GetStudentsFromRoster()
         {
-            StreamReader sr = new StreamReader(fileLocation);
+            StreamReader sr = new StreamReader(RosterLocation);
             // read the fiirst linw which is just a key. 
             string input = sr.ReadLine();
             // read the first data line. 
@@ -74,6 +76,16 @@ namespace ACES
                 }
             }
 
+        }
+
+        internal string getRosterLocation()
+        {
+            return RosterLocation;
+        }
+
+        internal string getOrgName()
+        {
+            return NameOfOrgansation;
         }
     }
 }
