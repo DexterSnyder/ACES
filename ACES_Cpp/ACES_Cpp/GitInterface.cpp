@@ -1,10 +1,8 @@
 //Visual Studio flags ctime as unsafe. Need to suppress the warnings
 #define _CRT_SECURE_NO_WARNINGS 0
 
-#include <cstdlib>
 #include <ctime> 
 #include <string>
-
 
 void gitCommit()
 {
