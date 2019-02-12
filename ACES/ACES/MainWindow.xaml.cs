@@ -29,12 +29,8 @@ namespace ACES
         {
             InitializeComponent();
             GetClassList();
-<<<<<<< HEAD
-            SaveClassList();
-            dropDown name: .ItemsSource  = classList; 
-=======
+
             classbox.ItemsSource  = classList; 
->>>>>>> 9a6692d8fe96c58eb17bddf87f17eed1db85e973
         }
 
         private void SaveClassList()
@@ -108,7 +104,7 @@ namespace ACES
             GitInterface temp = new GitInterface();
             string studentFolder = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\Student1";
             string instructorKey = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\UnitTests_InstructorVersion.cpp";
-            temp.BuildAssignment(studentFolder, instructorKey);
+            temp.BuildAssignment(studentFolder, instructorKey, "23456");
         }
     }
 }
