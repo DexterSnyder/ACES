@@ -16,7 +16,8 @@ namespace ACES
         public Class(string nameOfOrgansation, string rosterLocation)
         {
             NameOfOrgansation = nameOfOrgansation;
-            RosterLocation = rosterLocation; 
+            RosterLocation = rosterLocation;
+            GetStudentsFromRoster();
         }
 
         public void GetStudentsFromRoster()
@@ -32,7 +33,7 @@ namespace ACES
                 // split the line into a list of items 
                 string[] line = input.Split(',');
                 // get the student username and id set by the teacher. 
-                Students.Add(new Student(line[0], line[1]));
+                Students.Add(new Student(line[0].Trim('"'), line[1].Trim('"')));
                 //Read the next line
                 input = sr.ReadLine();
             }
@@ -44,6 +45,7 @@ namespace ACES
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.UseShellExecute = false;
             cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.RedirectStandardError = true;
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.Start();
 
@@ -60,15 +62,36 @@ namespace ACES
 
                 cmd.StandardInput.WriteLine(repofolder);
 
-                string getcommits = "git rev-list --count Master";
+                cmd.StandardInput.WriteLine("git rev-list --count Master");
 
-                cmd.StandardInput.WriteLine(getcommits);
+                cmd.StandardInput.WriteLine("exit");
+                string output = cmd.StandardOutput.ReadLine();
+                List<string> lines = new List<string>();
 
-                string output = cmd.StandardOutput.ReadToEnd();
+                // cycle though the lines of output untill it runs out and get the last line 
+                while (output != null)
+                {
+                    // get the last line in output. 
+                    lines.Add(output);
+                    //
+                    output = cmd.StandardOutput.ReadLine();
+                }
+
+                string error = cmd.StandardError.ReadLine();
+
+                // cycle though the lines of output untill it runs out and get the last line 
+                while (error != null)
+                {
+                    // get the last line in output. 
+                    lines.Add(error);
+                    //
+                    error = cmd.StandardError.ReadLine();
+                }
+
 
                 try
                 {
-                    current.setCommits(Int32.Parse(output));
+                    current.setCommits(Int32.Parse(lines[8]));
                 }
                 catch(Exception e)
                 {
