@@ -11,8 +11,8 @@ namespace ACES
         String Name;
         // numnber of commits. 
         int Commits;
-        // rate wether the student cheeted or not. 
-        string Rateing;
+        // rate wether the student cheated or not. 
+        string Rating;
         // getHuber username to pull students assigment. 
         string getHubUserName;
         // score of the unit tests 
@@ -22,7 +22,7 @@ namespace ACES
         {
             Name = name;
             Commits = 0;
-            Rateing = "Green";
+            Rating = "Green";
             getHubUserName = userName;
             Score = 0;
         }

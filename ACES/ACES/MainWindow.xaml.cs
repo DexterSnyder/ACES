@@ -29,7 +29,7 @@ namespace ACES
             InitializeComponent();
             GetClassList();
             SaveClassList();
-            //dropDown name: .ItemsSource  = classList; 
+            dropDown name: .ItemsSource  = classList; 
         }
 
         private void SaveClassList()
@@ -40,6 +40,14 @@ namespace ACES
         private void GetClassList()
         {
             throw new NotImplementedException();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GitInterface temp = new GitInterface();
+            string studentFolder = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\Student1";
+            string instructorKey = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\UnitTests_InstructorVersion.cpp";
+            temp.BuildAssignment(studentFolder, instructorKey);
         }
     }
 }
