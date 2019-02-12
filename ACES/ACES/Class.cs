@@ -41,19 +41,18 @@ namespace ACES
 
         public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey)
         {
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardError = true;
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.Start();
-
-            cmd.Start();
             foreach (Student current in Students)
             {
-   //example of clone command:     git clone https://Adamvans:8my8w5PdYt92@github.com/DexterSnyderTestOrg/assignment1-xar83.git C:\Users\Ethgar\Documents\School\C#\test\test@testing.com
-                string gitClone = "git clone https://"+ userkey +"@github.com/"+ NameOfOrgansation+"/"+assignmentName+"-"+current.GetUserName()+".get "+targetFolder+"\\"+current.GetName();
+
+                Process cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.RedirectStandardError = true;
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.Start();
+                //example of clone command:     git clone https://Adamvans:8my8w5PdYt92@github.com/DexterSnyderTestOrg/assignment1-xar83.git C:\Users\Ethgar\Documents\School\C#\test\test@testing.com
+                string gitClone = "git clone https://"+ userkey +"@github.com/"+ NameOfOrgansation+"/"+assignmentName+"-"+current.GetUserName()+".git "+targetFolder+"\\"+current.GetName();
 
 
                 cmd.StandardInput.WriteLine(gitClone);
@@ -84,19 +83,22 @@ namespace ACES
                 {
                     // get the last line in output. 
                     lines.Add(error);
-                    //
+                    // get error info. 
                     error = cmd.StandardError.ReadLine();
                 }
 
-
-                try
+                if (lines[lines.Count - 1] != "The system cannot find the path specified.")
                 {
-                    current.setCommits(Int32.Parse(lines[8]));
+                    try
+                    {
+                        current.setCommits(Int32.Parse(lines[8]));
+                    }
+                    catch(Exception e)
+                    {
+                        throw e;
+                    }
                 }
-                catch(Exception e)
-                {
-                    throw e;
-                }
+                
             }
 
         }
