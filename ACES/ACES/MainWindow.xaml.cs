@@ -104,7 +104,7 @@ namespace ACES
             GitInterface temp = new GitInterface();
             string studentFolder = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\Student1";
             string instructorKey = "C:\\Users\\dexte\\OneDrive\\Desktop\\SE3\\UnitTests_InstructorVersion.cpp";
-            temp.BuildAssignment(studentFolder, instructorKey, "23456");
+            //temp.BuildAssignment(studentFolder, instructorKey, "23456");
         }
     }
 }

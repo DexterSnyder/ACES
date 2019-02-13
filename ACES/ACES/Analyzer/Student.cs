@@ -1,18 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ACES
 {
-    public struct Commit
-    {
-
-    };
-
+    /// <summary>
+    /// class to old the students after being pulled from the site.
+    /// </summary>
     class Student
     {
-        public List<Commit> CommitHistory { get; private set; }
+        /// <summary>
+        /// Students Username
+        /// </summary>
+        String Name;
+        
+        /// <summary>
+        /// Number of commits
+        /// </summary>
+        int Commits;
+        
+        /// <summary>
+        /// Rating
+        /// </summary>
+        string Rating;
+        
+        /// <summary>
+        /// github user name
+        /// </summary>
+        string GitHubUserName;
+        
+        /// <summary>
+        /// Score on the unit tests
+        /// </summary>
+        int Score;
+
+        public Student(string name, string userName)
+        {
+            Name = name;
+            Commits = 0;
+            Rating = "Green";
+            GitHubUserName = userName;
+            Score = 0;
+        }
+
+        internal string GetUserName()
+        {
+            return GitHubUserName;
+        }
+
+        internal string GetName()
+        {
+            return Name;
+        }
+
+        internal void setCommits(int num)
+        {
+            this.Commits = num;
+        }
     }
 }

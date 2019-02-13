@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using System.Diagnostics;
 
 namespace ACES
 {
-    struct score
-    {
-        public int numberCorrect;
-        public int numberIncorrect;
-    }
-
-    class GitInterface
+    class SystemInterface
     {
         /// <summary>
         /// builds a students c++ assignment
         /// </summary>
         /// <param name="studentProjLocation">Folder location of the students project</param>
         /// <param name="instructorUnitTests">Directory location of the instructors unit tests</param>
-        public score BuildAssignment (string studentProjLocation, string instructorUnitTests, string securityCode)
+        public score BuildAssignment(string studentProjLocation, string instructorUnitTests, string securityCode)
         {
             score tempScore = new score();
             tempScore.numberCorrect = 0;
@@ -88,7 +81,7 @@ namespace ACES
             foreach (var line in lines)
             {
                 string temp = line.Trim();
-                
+
                 if (temp == "Failed test")
                 {
                     tempScore.numberIncorrect++;
@@ -98,11 +91,10 @@ namespace ACES
                 {
                     tempScore.numberCorrect++;
                 }
-                
+
             }
 
             return tempScore;
         }//build assignment
-
-    }//class
-}//namespace
+    }
+}
