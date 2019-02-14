@@ -61,8 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="Analyzer\Class.cs" />
+    <Compile Include="Analyzer\Student.cs" />
+    <Compile Include="Interface\GitInterface.cs" />
+    <Compile Include="Interface\SystemInterface.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,7 +74,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GitInterface\GitInterface.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

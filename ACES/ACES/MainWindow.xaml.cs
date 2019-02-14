@@ -46,7 +46,7 @@ namespace ACES
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                        //sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
                     }
 
                 }
@@ -60,7 +60,7 @@ namespace ACES
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                        //sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
                     }
                 }
             }
