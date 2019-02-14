@@ -62,6 +62,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class.cs" />
+    <Compile Include="CreateClass.xaml.cs" />
+    <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Student.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
