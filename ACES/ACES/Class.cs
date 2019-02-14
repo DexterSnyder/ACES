@@ -87,13 +87,21 @@ namespace ACES
                     error = cmd.StandardError.ReadLine();
                 }
 
-                if (lines[lines.Count - 1] != "The system cannot find the path specified.")
+                if (lines[lines.Count - 3] == "remote: Invalid username or password.")
+                {
+                    throw new Exception("Invalid username or password.");
+                }
+                else if (lines[lines.Count - 1] == "The system cannot find the path specified.") 
+                {
+                    throw new Exception("repository not found");
+                }
+                else
                 {
                     try
                     {
                         current.setCommits(Int32.Parse(lines[8]));
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         throw e;
                     }
