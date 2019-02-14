@@ -63,8 +63,13 @@
     </ApplicationDefinition>
     <Compile Include="Analyzer\Class.cs" />
     <Compile Include="Analyzer\Student.cs" />
+    <Compile Include="CreateClass\CreateClass.xaml.cs" />
     <Compile Include="Interface\GitInterface.cs" />
     <Compile Include="Interface\SystemInterface.cs" />
+    <Page Include="CreateClass\CreateClass.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

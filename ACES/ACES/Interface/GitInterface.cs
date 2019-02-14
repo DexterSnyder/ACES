@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace ACES
 {
@@ -17,8 +18,7 @@ namespace ACES
     class GitInterface
     {
         
-
-        public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey, List<Student> students, string nameOfOrganization)
+        public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey, ObservableCollection<Student> students, string nameOfOrganization)
         {
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
