@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.ObjectModel;
 
 
 namespace ACES
@@ -11,17 +12,17 @@ namespace ACES
         /// <summary>
         /// List containing the student objects
         /// </summary>
-        public List<Student> Students { get; private set; }
+        public ObservableCollection<Student> Students { get; private set; }
 
         /// <summary>
         /// Name of the GitHub organizations
         /// </summary>
-        internal string NameOfOrgansation { get; private set; }
+        public string NameOfOrgansation { get; private set; }
 
         /// <summary>
         /// The file location of the roster
         /// </summary>
-        internal string RosterLocation { get; private set; }
+        public string RosterLocation { get; private set; }
 
         /// <summary>
         /// Github interface layer
@@ -38,7 +39,7 @@ namespace ACES
             NameOfOrgansation = nameOfOrgansation;
             RosterLocation = rosterLocation;
             GetStudentsFromRoster();
-            Students = new List<Student>();
+            Students = new ObservableCollection<Student>();
             git = new GitInterface();
         }
 
