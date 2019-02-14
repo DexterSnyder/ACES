@@ -89,8 +89,9 @@ namespace ACES
         private void test(object sender, RoutedEventArgs e)
         {
             classList.Add(new Class("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
-
-            classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:my8w5PdYt92");
+            
+            classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+           
         }
 
         private void saveInfo(object sender, System.ComponentModel.CancelEventArgs e)

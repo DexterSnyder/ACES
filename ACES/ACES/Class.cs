@@ -81,31 +81,31 @@ namespace ACES
                 // cycle though the lines of output untill it runs out and get the last line 
                 while (error != null)
                 {
+                    if (error == "remote: Invalid username or password.")
+                    {
+                        throw new Exception("Invalid username or password.");
+                    }
+                    else if (error.Contains("fatal: repository") && error.Contains("not found"))
+                    {
+                        Console.Error.Write("repository not found for user " + current.GetName());
+                    }
                     // get the last line in output. 
                     lines.Add(error);
                     // get error info. 
                     error = cmd.StandardError.ReadLine();
                 }
 
-                if (lines[lines.Count - 3] == "remote: Invalid username or password.")
+                
+                
+                try
                 {
-                    throw new Exception("Invalid username or password.");
+                    current.setCommits(Int32.Parse(lines[8]));
                 }
-                else if (lines[lines.Count - 1] == "The system cannot find the path specified.") 
+                catch (Exception e)
                 {
-                    throw new Exception("repository not found");
+                    throw e;
                 }
-                else
-                {
-                    try
-                    {
-                        current.setCommits(Int32.Parse(lines[8]));
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
-                }
+                
                 
             }
 
