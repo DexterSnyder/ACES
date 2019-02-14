@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACES;
+using ACES_GUI.CreateClass;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -15,21 +17,45 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ACES
+namespace ACES_GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-
         ObservableCollection<Class> classList = new ObservableCollection<Class>();
 
         public MainWindow()
         {
             InitializeComponent();
             GetClassList();
-            classbox.ItemsSource  = classList; 
+            SaveClassList();
+            RosterDataGrid();
+        }
+
+        private void RosterDataGrid()
+        {
+            DataGridTextColumn col1 = new DataGridTextColumn();
+            DataGridTextColumn col2 = new DataGridTextColumn();
+            DataGridTextColumn col3 = new DataGridTextColumn();
+            DataGridTextColumn col4 = new DataGridTextColumn();
+            studentFilesList.Columns.Add(col1);
+            studentFilesList.Columns.Add(col2);
+            studentFilesList.Columns.Add(col3);
+            studentFilesList.Columns.Add(col4);
+            col1.Binding = new Binding("Name");
+            col2.Binding = new Binding("Score");
+            col3.Binding = new Binding("Rating");
+            col4.Binding = new Binding("Result");
+            col1.Width = 78.5;
+            col2.Width = 78.5;
+            col3.Width = 78.5;
+            col4.Width = 78.5;
+            col1.Header = "Name";
+            col2.Header = "Score";
+            col3.Header = "Rating";
+            col4.Header = "Result";
         }
 
         private void SaveClassList()
@@ -45,7 +71,7 @@ namespace ACES
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                        sw.WriteLine(current.NameOfOrganisation + "," + current.RosterLocation);
                     }
 
                 }
@@ -59,7 +85,7 @@ namespace ACES
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.getOrgName() + "," + current.getRosterLocation());
+                        sw.WriteLine(current.NameOfOrganisation + "," + current.RosterLocation);
                     }
                 }
             }
@@ -86,17 +112,10 @@ namespace ACES
             }
         }
 
-        private void test(object sender, RoutedEventArgs e)
+        private void CreateClass_Click(object sender, RoutedEventArgs e)
         {
-            classList.Add(new Class("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
-            
-            classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
-           
-        }
-
-        private void saveInfo(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            SaveClassList();
+            var createWindow = new CreateClass.CreateClass();
+            createWindow.ShowDialog();
         }
     }
 }

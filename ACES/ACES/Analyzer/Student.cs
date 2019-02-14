@@ -7,29 +7,43 @@ namespace ACES
     /// </summary>
     class Student
     {
-        // username of student. 
+        /// <summary>
+        /// Students Username
+        /// </summary>
         String Name;
-        // numnber of commits. 
+        
+        /// <summary>
+        /// Number of commits
+        /// </summary>
         int Commits;
-        // rate wether the student cheeted or not. 
-        string Rateing;
-        // getHuber username to pull students assigment. 
-        string getHubUserName;
-        // score of the unit tests 
+        
+        /// <summary>
+        /// Rating
+        /// </summary>
+        string Rating;
+        
+        /// <summary>
+        /// github user name
+        /// </summary>
+        string GitHubUserName;
+        
+        /// <summary>
+        /// Score on the unit tests
+        /// </summary>
         int Score;
 
         public Student(string name, string userName)
         {
             Name = name;
             Commits = 0;
-            Rateing = "Green";
-            getHubUserName = userName;
+            Rating = "Green";
+            GitHubUserName = userName;
             Score = 0;
         }
 
         internal string GetUserName()
         {
-            return getHubUserName;
+            return GitHubUserName;
         }
 
         internal string GetName()
