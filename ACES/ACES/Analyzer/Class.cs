@@ -17,7 +17,7 @@ namespace ACES
         /// <summary>
         /// Name of the GitHub organizations
         /// </summary>
-        public string NameOfOrgansation { get; private set; }
+        public string NameOfOrganisation { get; private set; }
 
         /// <summary>
         /// The file location of the roster
@@ -36,7 +36,7 @@ namespace ACES
         /// <param name="rosterLocation">File location of the roster</param>
         public Class(string nameOfOrgansation, string rosterLocation)
         {
-            NameOfOrgansation = nameOfOrgansation;
+            NameOfOrganisation = nameOfOrgansation;
             RosterLocation = rosterLocation;
             GetStudentsFromRoster();
             Students = new ObservableCollection<Student>();
@@ -82,7 +82,7 @@ namespace ACES
         public void CloneStudentRepositorys (string assignmentName, string targetFolder, string userkey)
         {
             //broke this out to preserve proper layer architeture 
-            git.CloneStudentRepositorys(assignmentName, targetFolder, userkey, Students, NameOfOrgansation);
+            git.CloneStudentRepositorys(assignmentName, targetFolder, userkey, Students, NameOfOrganisation);
         }
 
     }//class
