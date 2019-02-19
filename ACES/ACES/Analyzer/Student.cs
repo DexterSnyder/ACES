@@ -10,27 +10,27 @@ namespace ACES
         /// <summary>
         /// Students Username
         /// </summary>
-        String Name;
-        
+        public String Name { get; private set; }
+
         /// <summary>
         /// Number of commits
         /// </summary>
-        int Commits;
-        
+        public int Commits { get; private set; }
+
         /// <summary>
         /// Rating
         /// </summary>
-        string Rating;
-        
+        public string Rating { get; set; }
+
         /// <summary>
         /// github user name
         /// </summary>
         string GitHubUserName;
-        
+
         /// <summary>
         /// Score on the unit tests
         /// </summary>
-        int Score;
+        public Score StudentScore;
 
         public Student(string name, string userName)
         {
@@ -38,7 +38,7 @@ namespace ACES
             Commits = 0;
             Rating = "Green";
             GitHubUserName = userName;
-            Score = 0;
+            StudentScore = new Score();
         }
 
         internal string GetUserName()
