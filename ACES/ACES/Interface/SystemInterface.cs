@@ -14,9 +14,9 @@ namespace ACES
         /// </summary>
         /// <param name="studentProjLocation">Folder location of the students project</param>
         /// <param name="instructorUnitTests">Directory location of the instructors unit tests</param>
-        public score BuildAssignment(string studentProjLocation, string instructorUnitTests, string securityCode)
+        public Score BuildAssignment(string studentProjLocation, string instructorUnitTests, string securityCode)
         {
-            score tempScore = new score();
+            Score tempScore = new Score();
             tempScore.numberCorrect = 0;
             tempScore.numberIncorrect = 0;
 
