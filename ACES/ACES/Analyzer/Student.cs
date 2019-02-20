@@ -30,7 +30,9 @@ namespace ACES
         /// <summary>
         /// Score on the unit tests
         /// </summary>
-        int Score;
+        int Score { get; set; }
+
+        public string ProjectLocation;
 
         public Student(string name, string userName)
         {
