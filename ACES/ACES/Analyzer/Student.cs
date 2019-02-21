@@ -15,7 +15,7 @@ namespace ACES
         /// <summary>
         /// Number of commits
         /// </summary>
-        public int Commits { get; private set; }
+        public int Commits { get; set; }
 
         /// <summary>
         /// Rating
@@ -25,7 +25,7 @@ namespace ACES
         /// <summary>
         /// github user name
         /// </summary>
-        string GitHubUserName;
+        public string GitHubUserName;
 
         /// <summary>
         /// Score on the unit tests
@@ -45,16 +45,6 @@ namespace ACES
             Rating = "Green";
             GitHubUserName = userName;
             StudentScore = new Score();
-        }
-
-        internal string GetUserName()
-        {
-            return GitHubUserName;
-        }
-
-        internal string GetName()
-        {
-            return Name;
         }
 
         internal void setCommits(int num)

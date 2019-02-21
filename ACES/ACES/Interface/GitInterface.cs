@@ -22,25 +22,24 @@ namespace ACES
         /// <param name="nameOfOrganization">The name of the GitHub org</param>
         public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey, ObservableCollection<Student> students, string nameOfOrganization)
         {
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardError = true;
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.Start();
-
-            cmd.Start();
             foreach (Student current in students)
             {
-                //example of clone command:     git clone https://Adamvans:8my8w5PdYt92@github.com/DexterSnyderTestOrg/assignment1-xar83.git C:\Users\Ethgar\Documents\School\C#\test\test@testing.com
+                Process cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.RedirectStandardError = true;
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.Start();
+
+                
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
-                    + assignmentName + "-" + current.GetUserName() + ".get " + targetFolder + "\\" + current.GetName();
+                    + assignmentName + "-" + current.GitHubUserName + ".get " + targetFolder + "\\" + current.Name;
 
 
                 cmd.StandardInput.WriteLine(gitClone);
 
-                string repofolder = "cd " + targetFolder + "\\" + current.GetName();
+                string repofolder = "cd " + targetFolder + "\\" + current.Name;
 
                 cmd.StandardInput.WriteLine(repofolder);
 
@@ -71,11 +70,11 @@ namespace ACES
                     else if (error.Contains("fatal: repository") && error.Contains("not found"))
                     {
                       
-                        Console.Error.Write("repository not found for user " + current.GetName());
+                        Console.Error.Write("repository not found for user " + current.Name);
                     }
                     else
                     {
-                        current.ProjectLocation = targetFolder + "\\" + current.GetName();
+                        current.ProjectLocation = targetFolder + "\\" + current.Name;
                     }
                     // get the last line in output. 
                     lines.Add(error);
@@ -86,7 +85,7 @@ namespace ACES
 
                 try
                 {
-                    current.setCommits(Int32.Parse(lines[8]));
+                    current.Commits = Int32.Parse(lines[8]);
                 }
                 catch (Exception e)
                 {
