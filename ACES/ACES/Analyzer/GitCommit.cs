@@ -8,7 +8,12 @@ namespace ACES
 {
     class GitCommit
     {
+        /// <summary>
+        /// The date and time of the commit
+        /// </summary>
         public DateTime CommitDateTime {get;set;}
+
+
 
     }
 }
