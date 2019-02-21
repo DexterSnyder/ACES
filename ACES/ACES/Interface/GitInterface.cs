@@ -45,15 +45,26 @@ namespace ACES
 
                 cmd.StandardInput.WriteLine("git rev-list --count Master");
 
+                cmd.StandardInput.WriteLine("git Log");
+
                 cmd.StandardInput.WriteLine("exit");
                 string output = cmd.StandardOutput.ReadLine();
-                List<string> lines = new List<string>();
 
                 // cycle though the lines of output untill it runs out and get the last line 
                 while (output != null)
                 {
-                    // get the last line in output. 
-                    lines.Add(output);
+                    if (output.Contains("Author:"))
+                    {
+                        lines.Add(output);
+                        output = cmd.StandardOutput.ReadLine();
+                        lines.Add(output);
+                        output = cmd.StandardOutput.ReadLine();
+                        lines.Add(output);
+                    }
+                    else if (output.All(Char.IsDigit))
+                    {
+                        current.Commits = Int32.Parse(output);
+                    }
                     //
                     output = cmd.StandardOutput.ReadLine();
                 }
@@ -76,21 +87,10 @@ namespace ACES
                     {
                         current.ProjectLocation = targetFolder + "\\" + current.Name;
                     }
-                    // get the last line in output. 
-                    lines.Add(error);
-                    //
+                    // get the last line in output.
                     error = cmd.StandardError.ReadLine();
                 }
-
-
-                try
-                {
-                    current.Commits = Int32.Parse(lines[8]);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+              
             }// for loop
 
         }
