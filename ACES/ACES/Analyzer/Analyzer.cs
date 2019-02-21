@@ -56,7 +56,7 @@ namespace ACES
             foreach (Student student in CurrentClass.Students)
             {
                 //set the project location
-                projectLocation = targetFolder + "//" + assignmentName + "-" + student.Name;
+                projectLocation = targetFolder + "//" + student.Name;
                 //build each class and get a score
                 student.StudentScore = CurrentSystem.BuildAssignment(projectLocation, unitTestLocation, gradingKey);
                 Analyze(student);
@@ -73,6 +73,7 @@ namespace ACES
             {
                 throw new Exception("Student list not populated");
             }
+
             return CurrentClass.Students;
         }
 
