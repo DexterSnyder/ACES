@@ -71,7 +71,7 @@ namespace ACES_GUI
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.NameOfOrganisation + "," + current.RosterLocation);
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
                     }
 
                 }
@@ -85,7 +85,7 @@ namespace ACES_GUI
                     // write all data to the file. 
                     foreach (Class current in classList)
                     {
-                        sw.WriteLine(current.NameOfOrganisation + "," + current.RosterLocation);
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
                     }
                 }
             }

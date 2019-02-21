@@ -38,8 +38,8 @@ namespace ACES
         {
             NameOfOrganization = nameOfOrgansation;
             RosterLocation = rosterLocation;
-            GetStudentsFromRoster();
             Students = new ObservableCollection<Student>();
+            GetStudentsFromRoster();
             git = new GitInterface();
         }
 

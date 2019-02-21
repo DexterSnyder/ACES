@@ -64,6 +64,19 @@ namespace ACES
                 // cycle though the lines of output until it runs out and get the last line 
                 while (error != null)
                 {
+                    if (error == "remote: Invalid username or password.")
+                    {
+                        throw new Exception("Invalid username or password.");
+                    }
+                    else if (error.Contains("fatal: repository") && error.Contains("not found"))
+                    {
+                      
+                        Console.Error.Write("repository not found for user " + current.GetName());
+                    }
+                    else
+                    {
+                        current.ProjectLocation = targetFolder + "\\" + current.GetName();
+                    }
                     // get the last line in output. 
                     lines.Add(error);
                     //
