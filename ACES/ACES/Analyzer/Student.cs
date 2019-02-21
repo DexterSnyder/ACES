@@ -30,13 +30,13 @@ namespace ACES
         /// <summary>
         /// Score on the unit tests
         /// </summary>
-        int Score { get; set; }
+        public Score StudentScore;
 
         /// <summary>
         /// location of the students repo 
         /// </summary>
         public string ProjectLocation;
-        public Score StudentScore;
+       
 
         public Student(string name, string userName)
         {
