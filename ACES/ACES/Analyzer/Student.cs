@@ -32,6 +32,9 @@ namespace ACES
         /// </summary>
         int Score { get; set; }
 
+        /// <summary>
+        /// location of the students repo 
+        /// </summary>
         public string ProjectLocation;
 
         public Student(string name, string userName)
