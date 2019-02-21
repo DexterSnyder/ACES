@@ -9,15 +9,17 @@ using System.Collections.ObjectModel;
 
 namespace ACES
 {
-    struct score
-    {
-        public int numberCorrect;
-        public int numberIncorrect;
-    }
-
     class GitInterface
     {
         
+        /// <summary>
+        /// Clone the student repo's onto the local machine
+        /// </summary>
+        /// <param name="assignmentName">Name of the assignment</param>
+        /// <param name="targetFolder">The high level target folder</param>
+        /// <param name="userkey">Username:Password</param>
+        /// <param name="students">A list of the students</param>
+        /// <param name="nameOfOrganization">The name of the GitHub org</param>
         public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey, ObservableCollection<Student> students, string nameOfOrganization)
         {
             Process cmd = new Process();
@@ -32,7 +34,8 @@ namespace ACES
             foreach (Student current in students)
             {
                 //example of clone command:     git clone https://Adamvans:8my8w5PdYt92@github.com/DexterSnyderTestOrg/assignment1-xar83.git C:\Users\Ethgar\Documents\School\C#\test\test@testing.com
-                string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" + assignmentName + "-" + current.GetUserName() + ".get " + targetFolder + "\\" + current.GetName();
+                string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
+                    + assignmentName + "-" + current.GetUserName() + ".get " + targetFolder + "\\" + current.GetName();
 
 
                 cmd.StandardInput.WriteLine(gitClone);

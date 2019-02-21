@@ -62,6 +62,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Analyzer\Class.cs" />
+    <Compile Include="Analyzer\GitCommit.cs" />
+    <Compile Include="Analyzer\Score.cs" />
     <Compile Include="Analyzer\Student.cs" />
     <Compile Include="CreateClass\CreateClass.xaml.cs" />
     <Compile Include="Interface\GitInterface.cs" />
