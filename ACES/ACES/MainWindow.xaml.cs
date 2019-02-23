@@ -32,7 +32,6 @@ namespace ACES_GUI
             GetClassList();
             SaveClassList();
             RosterDataGrid();
-            classComboBox.ItemsSource = classList;
         }
 
         private void RosterDataGrid()
@@ -119,9 +118,21 @@ namespace ACES_GUI
             createWindow.ShowDialog();
         }
 
-        private void RunChecks(object sender, RoutedEventArgs e)
+        private async void RunChecks(object sender, RoutedEventArgs e)
         {
-            classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+            // teseting login 
+            //try
+            //{
+            //    UserInfo test = new UserInfo("Adamvans", "8my8w5PdYt92");
+            //    await test.login();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            //}
+            
+            // testing commit logging 
+            // classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
         }
     }
 }
