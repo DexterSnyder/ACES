@@ -31,23 +31,18 @@ namespace ACES
                 cmd.StartInfo.RedirectStandardError = true;
                 cmd.StartInfo.RedirectStandardInput = true;
                 cmd.Start();
-
-                
+ 
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
-                    + assignmentName + "-" + current.GitHubUserName + ".get " + targetFolder + "\\" + current.Name;
-
+                    + assignmentName + "-" + current.GitHubUserName + ".git " + targetFolder + "\\" + current.Name;
 
                 cmd.StandardInput.WriteLine(gitClone);
 
-                string repofolder = "cd " + targetFolder + "\\" + current.Name;
+                cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
-                cmd.StandardInput.WriteLine(repofolder);
-
-                cmd.StandardInput.WriteLine("git rev-list --count Master");
-
-                cmd.StandardInput.WriteLine("git Log");
+                cmd.StandardInput.WriteLine("git log");
 
                 cmd.StandardInput.WriteLine("exit");
+
                 string output = cmd.StandardOutput.ReadLine();
 
                 // cycle though the lines of output untill it runs out and get the last line 
@@ -55,17 +50,20 @@ namespace ACES
                 {
                     if (output.Contains("Author:"))
                     {
-                        lines.Add(output);
+                        string author = output;
                         output = cmd.StandardOutput.ReadLine();
-                        lines.Add(output);
+                        string date = output;
                         output = cmd.StandardOutput.ReadLine();
-                        lines.Add(output);
+                        output = cmd.StandardOutput.ReadLine();
+                        string massage = output.Trim();
+
+                        GitCommit commitData = new GitCommit();
+
+                        commitData.PopulateDataFields(date, massage ,author);
+
+                        current.commits.Add(commitData);
                     }
-                    else if (output.All(Char.IsDigit))
-                    {
-                        current.Commits = Int32.Parse(output);
-                    }
-                    //
+                    
                     output = cmd.StandardOutput.ReadLine();
                 }
 

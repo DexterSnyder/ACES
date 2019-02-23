@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ACES
 {
@@ -11,11 +12,6 @@ namespace ACES
         /// Students Username
         /// </summary>
         public String Name { get; private set; }
-
-        /// <summary>
-        /// Number of commits
-        /// </summary>
-        public int Commits { get; set; }
 
         /// <summary>
         /// Rating
@@ -36,20 +32,17 @@ namespace ACES
         /// location of the students repo 
         /// </summary>
         public string ProjectLocation;
-       
+
+        public List<GitCommit> commits;
+
 
         public Student(string name, string userName)
         {
             Name = name;
-            Commits = 0;
             Rating = "Green";
             GitHubUserName = userName;
+            commits = new List<GitCommit>();
             StudentScore = new Score();
-        }
-
-        internal void setCommits(int num)
-        {
-            this.Commits = num;
         }
     }
 }

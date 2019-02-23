@@ -61,7 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analyzer\Class.cs" />
+    <Compile Include="Analyzer\ClassRoom.cs" />
     <Compile Include="Analyzer\GitCommit.cs" />
     <Compile Include="Analyzer\Score.cs" />
     <Compile Include="Analyzer\Student.cs" />

@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace ACES
 {
-    class Class
+    class ClassRoom
     {
         /// <summary>
         /// List containing the student objects
@@ -34,7 +34,7 @@ namespace ACES
         /// </summary>
         /// <param name="nameOfOrgansation">Name of the GitHub organization</param>
         /// <param name="rosterLocation">File location of the roster</param>
-        public Class(string nameOfOrgansation, string rosterLocation)
+        public ClassRoom(string nameOfOrgansation, string rosterLocation)
         {
             NameOfOrganization = nameOfOrgansation;
             RosterLocation = rosterLocation;
@@ -46,7 +46,7 @@ namespace ACES
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        private Class()
+        private ClassRoom()
         { 
             //Don't use
         }
@@ -66,8 +66,13 @@ namespace ACES
             {
                 // split the line into a list of items 
                 string[] line = input.Split(',');
-                // get the student username and id set by the teacher. 
-                Students.Add(new Student(line[0].Trim('"'), line[1].Trim('"')));
+
+                // only input students that have connected to github classroom 
+                if (line[1].Trim('"') != "")
+                {
+                    // get the student username and id set by the teacher. 
+                    Students.Add(new Student(line[0].Trim('"'), line[1].Trim('"')));
+                }
                 //Read the next line
                 input = sr.ReadLine();
             }
@@ -83,6 +88,15 @@ namespace ACES
         {
             //broke this out to preserve proper layer architeture 
             git.CloneStudentRepositorys(assignmentName, targetFolder, userkey, Students, NameOfOrganization);
+        }
+
+        /// <summary>
+        /// metod to show the list of classes in the dropdown. need id for class. 
+        /// </summary>
+        override
+        public string ToString()
+        {
+            return NameOfOrganization;
         }
 
     }//class
