@@ -17,8 +17,33 @@ void gitCommit()
 	//now we have to trim the /n off the end of the string
 	tempTime = tempTime.substr(0, tempTime.size() - 1);
 
+	std::string compiler = " - ";
+
+	//define compiler
+	/*CLion uses other compilers in their tool chain
+	see: https://www.jetbrains.com/help/clion/how-to-switch-compilers-in-clion.html */
+
+#ifdef _MSC_VER //Visual Studio
+	compiler += "Microsoft_Visual_Studio";
+#elif __GNUC__ //gcc
+	compiler += "GCC";
+#elif __clang__ //clang
+	compiler += "Clang";
+#elif __MINGW32__ //minGW 32 bit
+	compiler += "MinGW_32_bit";
+#elif __MINGW64__ //minGW 64 bit
+	compiler += "MinGW_64_bit";
+#elif __BORLANDC__ //Borland
+	compiler += "Borland";
+#elif __TINYC__ //Tiny C
+	compiler += "Tiny_C";
+#else
+	compiler += "Unknown";
+#endif
+	//More listed here: https://sourceforge.net/p/predef/wiki/Compilers/
+
 	//build the command to commit to the local branch
-	std::string commitCommand = "git commit -m \"" +tempTime;
+	std::string commitCommand = "git commit -m \"" + tempTime + compiler;
 	commitCommand += "\"";
 
 	//run commmands on the cmd line
