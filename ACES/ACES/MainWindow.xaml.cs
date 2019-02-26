@@ -24,16 +24,20 @@ namespace ACES_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ObservableCollection<Class> classList = new ObservableCollection<Class>();
+        private ObservableCollection<Class> classList = new ObservableCollection<Class>();
 
         public MainWindow()
         {
             InitializeComponent();
             GetClassList();
+
             SaveClassList();
             RosterDataGrid();
+
+            classComboBox.ItemsSource = classList;
         }
 
+        //Datagrid for displaying students assignment scores, info, etc.
         private void RosterDataGrid()
         {
             DataGridTextColumn col1 = new DataGridTextColumn();
@@ -45,7 +49,7 @@ namespace ACES_GUI
             studentFilesList.Columns.Add(col3);
             studentFilesList.Columns.Add(col4);
             col1.Binding = new Binding("Name");
-            col2.Binding = new Binding("Score");
+            //col2.Binding = new Binding("Tests Passed");
             col3.Binding = new Binding("Rating");
             col4.Binding = new Binding("Result");
             col1.Width = 78.5;
@@ -53,9 +57,10 @@ namespace ACES_GUI
             col3.Width = 78.5;
             col4.Width = 78.5;
             col1.Header = "Name";
-            col2.Header = "Score";
+            col2.Header = "Tests Passed";
             col3.Header = "Rating";
             col4.Header = "Result";
+
         }
 
         private void SaveClassList()
@@ -112,9 +117,21 @@ namespace ACES_GUI
             }
         }
 
+        private void test(object sender, RoutedEventArgs e)
+        {
+            classList.Add(new Class("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
+
+            classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+        }
+
+        private void saveInfo(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveClassList();
+        }
+
         private void CreateClass_Click(object sender, RoutedEventArgs e)
         {
-            var createWindow = new CreateClass.CreateClass();
+            var createWindow = new CreateClass.CreateClass(classList);
             createWindow.ShowDialog();
         }
     }

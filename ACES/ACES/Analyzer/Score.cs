@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACES
 {
-    class Score
+    public class Score
     {
         public int numberCorrect;
         public int numberIncorrect;

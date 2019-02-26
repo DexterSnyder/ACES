@@ -5,7 +5,7 @@ namespace ACES
     /// <summary>
     /// class to old the students after being pulled from the site.
     /// </summary>
-    class Student
+    public class Student
     {
         /// <summary>
         /// Students Username

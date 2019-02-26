@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace ACES
 {
-    class Class
+    public class Class
     {
         /// <summary>
         /// List containing the student objects
