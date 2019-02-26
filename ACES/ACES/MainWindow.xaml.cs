@@ -24,7 +24,7 @@ namespace ACES_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<Class> classList = new ObservableCollection<Class>();
+        ObservableCollection<ClassRoom> classList = new ObservableCollection<ClassRoom>();
 
         public MainWindow()
         {
@@ -74,7 +74,7 @@ namespace ACES_GUI
                 using (StreamWriter sw = File.CreateText(path))
                 {
                     // write all data to the file. 
-                    foreach (Class current in classList)
+                    foreach (ClassRoom current in classList)
                     {
                         sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
                     }
@@ -88,7 +88,7 @@ namespace ACES_GUI
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     // write all data to the file. 
-                    foreach (Class current in classList)
+                    foreach (ClassRoom current in classList)
                     {
                         sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
                     }
@@ -110,7 +110,7 @@ namespace ACES_GUI
                     while ((currentLine = sr.ReadLine()) != null)
                     {
                         string[] items = currentLine.Split(',');
-                        classList.Add(new Class(items[0], items[1]));
+                        classList.Add(new ClassRoom(items[0], items[1]));
                     }
 
                 }
@@ -133,6 +133,23 @@ namespace ACES_GUI
         {
             var createWindow = new CreateClass.CreateClass(classList);
             createWindow.ShowDialog();
+        }
+
+        private async void RunChecks(object sender, RoutedEventArgs e)
+        {
+            // teseting login 
+            //try
+            //{
+            //    UserInfo test = new UserInfo("Adamvans", "8my8w5PdYt92");
+            //    await test.login();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            //}
+            
+            // testing commit logging 
+            // classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
         }
     }
 }

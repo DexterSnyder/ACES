@@ -31,30 +31,39 @@ namespace ACES
                 cmd.StartInfo.RedirectStandardError = true;
                 cmd.StartInfo.RedirectStandardInput = true;
                 cmd.Start();
-
-                
+ 
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
-                    + assignmentName + "-" + current.GitHubUserName + ".get " + targetFolder + "\\" + current.Name;
-
+                    + assignmentName + "-" + current.GitHubUserName + ".git " + targetFolder + "\\" + current.Name;
 
                 cmd.StandardInput.WriteLine(gitClone);
 
-                string repofolder = "cd " + targetFolder + "\\" + current.Name;
+                cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
-                cmd.StandardInput.WriteLine(repofolder);
-
-                cmd.StandardInput.WriteLine("git rev-list --count Master");
+                cmd.StandardInput.WriteLine("git log");
 
                 cmd.StandardInput.WriteLine("exit");
+
                 string output = cmd.StandardOutput.ReadLine();
-                List<string> lines = new List<string>();
 
                 // cycle though the lines of output untill it runs out and get the last line 
                 while (output != null)
                 {
-                    // get the last line in output. 
-                    lines.Add(output);
-                    //
+                    if (output.Contains("Author:"))
+                    {
+                        string author = output;
+                        output = cmd.StandardOutput.ReadLine();
+                        string date = output;
+                        output = cmd.StandardOutput.ReadLine();
+                        output = cmd.StandardOutput.ReadLine();
+                        string massage = output.Trim();
+
+                        GitCommit commitData = new GitCommit();
+
+                        commitData.PopulateDataFields(date, massage ,author);
+
+                        current.commits.Add(commitData);
+                    }
+                    
                     output = cmd.StandardOutput.ReadLine();
                 }
 
@@ -76,21 +85,10 @@ namespace ACES
                     {
                         current.ProjectLocation = targetFolder + "\\" + current.Name;
                     }
-                    // get the last line in output. 
-                    lines.Add(error);
-                    //
+                    // get the last line in output.
                     error = cmd.StandardError.ReadLine();
                 }
-
-
-                try
-                {
-                    current.Commits = Int32.Parse(lines[8]);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+              
             }// for loop
 
         }

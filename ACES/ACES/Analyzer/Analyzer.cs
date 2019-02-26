@@ -14,7 +14,7 @@ namespace ACES
         /// <summary>
         /// The current class being run
         /// </summary>
-        public Class CurrentClass { get; private set; }
+        public ClassRoom CurrentClass { get; private set; }
 
         /// <summary>
         /// System interface layer
@@ -29,7 +29,7 @@ namespace ACES
         public Analyzer ()
         {
             CurrentSystem = new SystemInterface();
-            CurrentClass = new Class("", "");
+            CurrentClass = new ClassRoom("", "");
             hasRun = false;
         }
        
@@ -48,7 +48,7 @@ namespace ACES
         {
             hasRun = true;
             //get the class list, and load it up
-            CurrentClass = new Class(nameOfOrgansation, rosterLocation);
+            CurrentClass = new ClassRoom(nameOfOrgansation, rosterLocation);
             CurrentClass.CloneStudentRepositorys(assignmentName, targetFolder, userkey);
 
             string projectLocation = "";
@@ -56,7 +56,7 @@ namespace ACES
             foreach (Student student in CurrentClass.Students)
             {
                 //set the project location
-                projectLocation = targetFolder + "//" + assignmentName + "-" + student.Name;
+                projectLocation = targetFolder + "//" + student.Name;
                 //build each class and get a score
                 student.StudentScore = CurrentSystem.BuildAssignment(projectLocation, unitTestLocation, gradingKey);
                 Analyze(student);
@@ -73,6 +73,7 @@ namespace ACES
             {
                 throw new Exception("Student list not populated");
             }
+
             return CurrentClass.Students;
         }
 
