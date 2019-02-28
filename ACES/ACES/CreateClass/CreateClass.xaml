@@ -11,7 +11,7 @@
         <Label Content="Roster File:" HorizontalAlignment="Left" Margin="95,110,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="classroomName" HorizontalAlignment="Left" Height="23" Margin="167,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
         <TextBox x:Name="rosterFile" HorizontalAlignment="Left" Height="23" Margin="167,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="197"/>
-        <Button x:Name="createClassButton" Content="Create" HorizontalAlignment="Left" Margin="167,172,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="createClassButton" Content="Create" HorizontalAlignment="Left" Margin="167,172,0,0" VerticalAlignment="Top" Width="75" Click="createClassButton_Click"/>
 
     </Grid>
 </Window>

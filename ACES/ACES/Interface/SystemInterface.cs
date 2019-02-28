@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace ACES
 {
-    class SystemInterface
+    public class SystemInterface
     {
         /// <summary>
         /// builds a students c++ assignment

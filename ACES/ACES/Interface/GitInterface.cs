@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace ACES
 {
-    class GitInterface
+    public class GitInterface
     {
         
         /// <summary>
