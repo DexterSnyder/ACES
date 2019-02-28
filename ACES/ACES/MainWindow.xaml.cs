@@ -44,22 +44,32 @@ namespace ACES_GUI
             DataGridTextColumn col2 = new DataGridTextColumn();
             DataGridTextColumn col3 = new DataGridTextColumn();
             DataGridTextColumn col4 = new DataGridTextColumn();
-            studentFilesList.Columns.Add(col1);
+            DataGridTextColumn col5 = new DataGridTextColumn();
+            DataGridTextColumn col6 = new DataGridTextColumn();
+           // studentFilesList.Columns.Add(col1);
             studentFilesList.Columns.Add(col2);
             studentFilesList.Columns.Add(col3);
             studentFilesList.Columns.Add(col4);
-            col1.Binding = new Binding("Name");
-            //col2.Binding = new Binding("Tests Passed");
-            col3.Binding = new Binding("Rating");
-            col4.Binding = new Binding("Result");
-            col1.Width = 78.5;
-            col2.Width = 78.5;
-            col3.Width = 78.5;
-            col4.Width = 78.5;
-            col1.Header = "Name";
+            studentFilesList.Columns.Add(col5);
+            studentFilesList.Columns.Add(col6);
+            //col1.Binding = new Binding("Name");
+            col2.Binding = new Binding("Tests Passed");
+            col3.Binding = new Binding("Commits");
+            col4.Binding = new Binding("Avg Commit Time");
+            col5.Binding = new Binding("Std Dev");
+            col6.Binding = new Binding("Compiler Used");
+           // col1.Width = 83.33;
+            col2.Width = 83.33;
+            col3.Width = 83.33;
+            col4.Width = 83.33;
+            col4.Width = 83.33;
+            col4.Width = 83.33;
+           // col1.Header = "Name";
             col2.Header = "Tests Passed";
-            col3.Header = "Rating";
-            col4.Header = "Result";
+            col3.Header = "Commits";
+            col4.Header = "Avg Commit Time";
+            col5.Header = "Std Dev";
+            col6.Header = "Compiler Used";
 
         }
 
@@ -119,7 +129,7 @@ namespace ACES_GUI
 
         private void test(object sender, RoutedEventArgs e)
         {
-            classList.Add(new Class("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
+            classList.Add(new ClassRoom("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
 
             classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
         }
@@ -150,6 +160,12 @@ namespace ACES_GUI
             
             // testing commit logging 
             // classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+        }
+
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
         }
     }
 }

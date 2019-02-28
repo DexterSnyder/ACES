@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ACES
 {
-    class UserInfo
+    public class UserInfo
     {
         public string userName;
 

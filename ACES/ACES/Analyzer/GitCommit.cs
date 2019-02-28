@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACES
 {
-    class GitCommit
+    public class GitCommit
     {
         /// <summary>
         /// The date and time of the commit per git

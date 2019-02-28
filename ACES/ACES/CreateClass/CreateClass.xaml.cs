@@ -21,9 +21,9 @@ namespace ACES_GUI.CreateClass
     /// </summary>
     public partial class CreateClass : Window
     {
-        ObservableCollection<Class> classList;
+        ObservableCollection<ClassRoom> classList;
 
-        public CreateClass(ObservableCollection<Class> cl)
+        public CreateClass(ObservableCollection<ClassRoom> cl)
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace ACES_GUI.CreateClass
 
         private void createClassButton_Click(object sender, RoutedEventArgs e)
         {
-            Class testClass = new Class(classroomName.Text, rosterFile.Text);
+            ClassRoom testClass = new ClassRoom(classroomName.Text, rosterFile.Text);
 
             classList.Add(testClass);
             this.Close();
