@@ -46,8 +46,28 @@ void gitCommit()
 	std::string commitCommand = "git commit -m \"" + tempTime + compiler;
 	commitCommand += "\"";
 
+	//Add something in the future to set this
+	std::string userName = "Default";
+	std::string userNameCmd = "git config user.name \"" + userName + "\"";
+	std::string email = "Default@Default.com";
+	std::string emailCmd = "git config user.email \"" + email + "\"";
+
+	//set up the default username and password
+//#ifdef unix || __unix__ || __unix || __linux__
+//	
+//#elif _WIN32 || _WIN64 || __CYGWIN__
+//	
+//#elif __APPLE__ || __MACH__
+//
+//#endif
+
 	//run commmands on the cmd line
 	system("git add -A");
+
+	//these don't accually have to run everytime, but this is the most straitforward way
+	system(userNameCmd.c_str());
+	system(email.c_str());
+
 	system(commitCommand.c_str());
 
 	//clean up - throws an exception when timeinfo is deleted
