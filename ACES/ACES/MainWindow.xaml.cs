@@ -102,7 +102,7 @@ namespace ACES_GUI
                 using (StreamReader sr = File.OpenText(path))
                 {
                     string currentLine = "";
-                    while ((currentLine = sr.ReadLine()) != null)
+                    while ((currentLine = sr.ReadLine()) != null && currentLine != "")
                     {
                         string[] items = currentLine.Split(',');
                         classList.Add(new ClassRoom(items[0], items[1]));
@@ -132,7 +132,7 @@ namespace ACES_GUI
             //}
             
             // testing commit logging 
-            // classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+             classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
         }
     }
 }

@@ -39,7 +39,7 @@ namespace ACES
 
                 cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
-                cmd.StandardInput.WriteLine("git log");
+                cmd.StandardInput.WriteLine("git log --shortstat");
 
                 cmd.StandardInput.WriteLine("exit");
 
