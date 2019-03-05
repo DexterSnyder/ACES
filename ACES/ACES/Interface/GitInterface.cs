@@ -56,10 +56,20 @@ namespace ACES
                         output = cmd.StandardOutput.ReadLine();
                         output = cmd.StandardOutput.ReadLine();
                         string massage = output.Trim();
+                        output = cmd.StandardOutput.ReadLine();
+                        output = cmd.StandardOutput.ReadLine();
+                        string linechanges = output;
+                        // if there is a multiline massage. pull lines until it finds the correct line. 
+                        while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
+                        {
+                            output = cmd.StandardOutput.ReadLine();
+                            output = cmd.StandardOutput.ReadLine();
+                            linechanges = output;
+                        }
 
                         GitCommit commitData = new GitCommit();
 
-                        commitData.PopulateDataFields(date, massage ,author);
+                        commitData.PopulateDataFields(date, massage ,author, linechanges);
 
                         current.commits.Add(commitData);
                     }
