@@ -41,6 +41,9 @@
     <Reference Include="Build">
       <HintPath>..\..\..\Externals\octokit.net-master\build\bin\Debug\netcoreapp2.0\Build.dll</HintPath>
     </Reference>
+    <Reference Include="Octokit, Version=0.32.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.32.0\lib\net45\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -61,13 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analyzer\Class.cs" />
+    <Compile Include="Analyzer\ClassRoom.cs" />
     <Compile Include="Analyzer\GitCommit.cs" />
     <Compile Include="Analyzer\Score.cs" />
     <Compile Include="Analyzer\Student.cs" />
     <Compile Include="CreateClass\CreateClass.xaml.cs" />
     <Compile Include="Interface\GitInterface.cs" />
     <Compile Include="Interface\SystemInterface.cs" />
+    <Compile Include="User\User.cs" />
     <Page Include="CreateClass\CreateClass.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +108,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

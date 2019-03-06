@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace ACES
 {
-    class GitCommit
+    public class GitCommit
     {
         /// <summary>
         /// The date and time of the commit per git
@@ -24,8 +21,25 @@ namespace ACES
         public string Author { get; private set; }
 
         /// <summary>
-        /// public constructor
+        /// compiler useed in the run command for this commit. 
         /// </summary>
+        public string Compiler { get; private set; }
+
+        /// <summary>
+        /// the number of files changed in this commit.  
+        /// </summary>
+        public int FilesChanged { get; private set; }
+
+        /// <summary>
+        /// lines added in this commit.  
+        /// </summary>
+        public int LinesInserted { get; private set; }
+
+        /// <summary>
+        /// lines removed in this commit.  
+        /// </summary>
+        public int LinesDeleted { get; private set; }
+
         public GitCommit()
         {
             CommitDateTime = new DateTime();
@@ -33,39 +47,46 @@ namespace ACES
             Author = "";
         }
 
-        /// <summary>
-        /// Populates the data fields
-        /// </summary>
-        /// <param name="date">The date of the commit</param>
-        /// <param name="message">The commit message</param>
-        /// <param name="author">the commit author</param>
-        public void PopulateDataFields (string date, string message, string author)
-        {
-            //format = Author: DexterSnyder <40254136+DexterSnyder@users.noreply.github.com>
-            //split on ':' first
-            string[] authorSplit1 = author.Split(':');
-            string authorTemp = authorSplit1[1];
-            //now split on the '<'
-            string[] authorSplit2 = authorTemp.Split('<');
-            author = authorSplit2[0]; //Should contain just the author name
-            //trim leading and trailing whitespace
-            author = author.Trim();
+        public void PopulateDataFields(string date, string message, string author, string linechanges)
+        {  // " 1 file changed, 3 insertions(+), 1 deletion(-)"
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM dd HH:mm:ss yyyy zzz", provider);
 
-            //format = Date:   Wed Feb 6 17:36:38 2019 -0700
-            //split on ':' first
-            string[] dateSplit1 = date.Split(':');
-            string dateTemp = dateSplit1[1];
-            //Now split on the '-'
-            string[] dateSplit2 = dateTemp.Split('-');
-            date = dateSplit2[0];
-            //trim the leading and trailing whitespace
-            date = date.Trim();
+            string[] splitAuthor = author.Split();
 
-            //format:     Wed Feb  6 17:36:24 2019
-            //Just trim the white spaces for now
-            message = message.Trim();
+            Author = splitAuthor[1];
 
-            //now convert message and date to a date time object
+            string[] splitmassage = message.Split('-');
+
+            string[] splitLineChanges = linechanges.Split(',');
+
+            FilesChanged = Int32.Parse(splitLineChanges[0].Split()[1]);
+
+            if (splitLineChanges[1].Contains("insertions"))  
+            {
+                LinesInserted = Int32.Parse(splitLineChanges[1].Split()[1]);
+
+                if (splitLineChanges.Length == 3)
+                {
+                    LinesDeleted = Int32.Parse(splitLineChanges[2].Split()[1]);
+                }
+            }
+            else
+            {
+                int LinesDeleted = Int32.Parse(splitLineChanges[1].Split()[1]);
+            }
+
+            try
+            {
+                CommitMessageDateTime = DateTime.ParseExact(splitmassage[0], "ddd MMM dd HH:mm:ss yyyy zzz", provider);
+
+                Compiler = splitmassage[1];
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex);
+                Compiler = "not automatic massage";
+            }
         }
     }
 }

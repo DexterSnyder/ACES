@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ACES;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,22 @@ namespace ACES_GUI.CreateClass
     /// </summary>
     public partial class CreateClass : Window
     {
-        public CreateClass()
+        ObservableCollection<ClassRoom> classList;
+
+        public CreateClass(ObservableCollection<ClassRoom> cl)
         {
             InitializeComponent();
+
+            classList = cl;
         }
+
+        private void createClassButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClassRoom testClass = new ClassRoom(classroomName.Text, rosterFile.Text);
+
+            classList.Add(testClass);
+            this.Close();
+        }
+
     }
 }

@@ -1,21 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ACES
 {
     /// <summary>
     /// class to old the students after being pulled from the site.
     /// </summary>
-    class Student
+    public class Student
     {
         /// <summary>
         /// Students Username
         /// </summary>
         public String Name { get; private set; }
-
-        /// <summary>
-        /// Number of commits
-        /// </summary>
-        public int Commits { get; private set; }
 
         /// <summary>
         /// Rating
@@ -25,7 +21,7 @@ namespace ACES
         /// <summary>
         /// github user name
         /// </summary>
-        string GitHubUserName;
+        public string GitHubUserName;
 
         /// <summary>
         /// Score on the unit tests
@@ -36,30 +32,17 @@ namespace ACES
         /// location of the students repo 
         /// </summary>
         public string ProjectLocation;
-       
+
+        public List<GitCommit> commits;
+
 
         public Student(string name, string userName)
         {
             Name = name;
-            Commits = 0;
             Rating = "Green";
             GitHubUserName = userName;
+            commits = new List<GitCommit>();
             StudentScore = new Score();
-        }
-
-        internal string GetUserName()
-        {
-            return GitHubUserName;
-        }
-
-        internal string GetName()
-        {
-            return Name;
-        }
-
-        internal void setCommits(int num)
-        {
-            this.Commits = num;
         }
     }
 }

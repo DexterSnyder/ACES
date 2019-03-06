@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 
 namespace ACES
 {
-    class GitInterface
+    public class GitInterface
     {
         
         /// <summary>
@@ -22,40 +22,58 @@ namespace ACES
         /// <param name="nameOfOrganization">The name of the GitHub org</param>
         public void CloneStudentRepositorys(string assignmentName, string targetFolder, string userkey, ObservableCollection<Student> students, string nameOfOrganization)
         {
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardError = true;
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.Start();
-
-            cmd.Start();
             foreach (Student current in students)
             {
-                //example of clone command:     git clone https://Adamvans:8my8w5PdYt92@github.com/DexterSnyderTestOrg/assignment1-xar83.git C:\Users\Ethgar\Documents\School\C#\test\test@testing.com
+                Process cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.RedirectStandardError = true;
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.Start();
+ 
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
-                    + assignmentName + "-" + current.GetUserName() + ".get " + targetFolder + "\\" + current.GetName();
-
+                    + assignmentName + "-" + current.GitHubUserName + ".git " + targetFolder + "\\" + current.Name;
 
                 cmd.StandardInput.WriteLine(gitClone);
 
-                string repofolder = "cd " + targetFolder + "\\" + current.GetName();
+                cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
-                cmd.StandardInput.WriteLine(repofolder);
-
-                cmd.StandardInput.WriteLine("git rev-list --count Master");
+                cmd.StandardInput.WriteLine("git log --shortstat");
 
                 cmd.StandardInput.WriteLine("exit");
+
                 string output = cmd.StandardOutput.ReadLine();
-                List<string> lines = new List<string>();
 
                 // cycle though the lines of output untill it runs out and get the last line 
                 while (output != null)
                 {
-                    // get the last line in output. 
-                    lines.Add(output);
-                    //
+                    if (output.Contains("Author:"))
+                    {
+                        string author = output;
+                        output = cmd.StandardOutput.ReadLine();
+                        string date = output;
+                        output = cmd.StandardOutput.ReadLine();
+                        output = cmd.StandardOutput.ReadLine();
+                        string massage = output.Trim();
+                        output = cmd.StandardOutput.ReadLine();
+                        output = cmd.StandardOutput.ReadLine();
+                        string linechanges = output;
+                        // if there is a multiline massage. pull lines until it finds the correct line. 
+                        while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
+                        {
+                            output = cmd.StandardOutput.ReadLine();
+                            output = cmd.StandardOutput.ReadLine();
+                            linechanges = output;
+                        }
+
+                        GitCommit commitData = new GitCommit();
+
+                        commitData.PopulateDataFields(date, massage ,author, linechanges);
+
+                        current.commits.Add(commitData);
+                    }
+                    
                     output = cmd.StandardOutput.ReadLine();
                 }
 
@@ -71,27 +89,16 @@ namespace ACES
                     else if (error.Contains("fatal: repository") && error.Contains("not found"))
                     {
                       
-                        Console.Error.Write("repository not found for user " + current.GetName());
+                        Console.Error.Write("repository not found for user " + current.Name);
                     }
                     else
                     {
-                        current.ProjectLocation = targetFolder + "\\" + current.GetName();
+                        current.ProjectLocation = targetFolder + "\\" + current.Name;
                     }
-                    // get the last line in output. 
-                    lines.Add(error);
-                    //
+                    // get the last line in output.
                     error = cmd.StandardError.ReadLine();
                 }
-
-
-                try
-                {
-                    current.setCommits(Int32.Parse(lines[8]));
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+              
             }// for loop
 
         }
