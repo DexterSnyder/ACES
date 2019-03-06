@@ -40,6 +40,9 @@ namespace ACES
         /// </summary>
         public int LinesDeleted { get; private set; }
 
+        /// <summary>
+        /// default constructor
+        /// </summary>
         public GitCommit()
         {
             CommitDateTime = new DateTime();
@@ -47,6 +50,13 @@ namespace ACES
             Author = "";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="message"></param>
+        /// <param name="author"></param>
+        /// <param name="linechanges"></param>
         public void PopulateDataFields(string date, string message, string author, string linechanges)
         {  // " 1 file changed, 3 insertions(+), 1 deletion(-)"
             CultureInfo provider = CultureInfo.InvariantCulture;
