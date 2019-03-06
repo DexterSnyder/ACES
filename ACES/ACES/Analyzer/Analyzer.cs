@@ -59,7 +59,7 @@ namespace ACES
                 projectLocation = targetFolder + "//" + student.Name;
                 //build each class and get a score
                 student.StudentScore = CurrentSystem.BuildAssignment(projectLocation, unitTestLocation, gradingKey);
-                Analyze(student);
+                analyze(student);
             }
         }
 
@@ -81,17 +81,51 @@ namespace ACES
         /// Main method for running anti cheating algorithms
         /// </summary>
         /// <param name="student">The student to analyze</param>
-        private void Analyze(Student student)
+        private void analyze(Student student)
         {
             if (!hasRun)
             {
                 throw new Exception("Student list not populated");
             }
 
-            //get the commits
+            //run analysis on commits//////////////////
 
-            //run analysis on commits
-        }
+            bool authorFlag = false;
+            //first, check how many commits they have done
+            foreach (GitCommit commit in student.commits)
+            {
+                //Make sure that they have run the program, and 
+                //that the author doesn't switch mid work
+                bool tempAuthorFlag = false;
+                if (commit.Author == "Default")
+                {
+                    authorFlag = true;
+                    student.NumStudentCommits++;
+                }
+
+                /*authorFlag shows that Default was found once, while
+                * tempAuthor flag shows that it was found each time
+                * If author flag is set, but temp isn't there was a change of
+                * author mid assignment. Red Flag
+                */
+                if (authorFlag && !tempAuthorFlag)
+                {
+                    student.Rating = "Red";
+                }
+
+            }//foreach
+
+            //These values can be adjusted for sensitivity
+            if (student.NumStudentCommits < 2)
+            {
+                student.Rating = "Red";
+            }
+            else if (student.NumStudentCommits < 5)
+            {
+                student.Rating = "Yellow";
+            }
+
+        } //void analyze(Student student)
 
     }//class 
 }//namespace
