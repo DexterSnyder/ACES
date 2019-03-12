@@ -99,6 +99,8 @@ namespace ACES
         /// </summary>
         public int stdDev { get; set; }
 
+        private List<string> reasonsWhy;
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -116,7 +118,26 @@ namespace ACES
             yellowMarks = 0;
             avgTimeBetweenCommits = 0;
             stdDev = 0;
+            reasonsWhy = new List<string>();
         }
 
+        /// <summary>
+        /// Returns a list of why student got their ratings
+        /// </summary>
+        /// <returns>List of why students got their ratings</returns>
+        public List<string> getReasonsWhy()
+        {
+            return reasonsWhy;
+        }
+
+        /// <summary>
+        /// Adds a reason of why students got their rating
+        /// Formate: [Color]: [Reason]
+        /// </summary>
+        /// <param name="reason">The reason for the rating</param>
+        public void addReasonWhy(string reason)
+        {
+            reasonsWhy.Add(reason);
+        }
     }
 }
