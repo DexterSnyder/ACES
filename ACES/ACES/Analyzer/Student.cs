@@ -14,6 +14,11 @@ namespace ACES
         public String Name { get; private set; }
 
         /// <summary>
+        ///Private backer for Rating
+        /// </summary>
+        private string rating;
+
+        /// <summary>
         /// Rating. Setting to green will overwrite any previous rating
         /// Setting to yellow or red will preserve the highest rating
         /// </summary>
@@ -21,17 +26,17 @@ namespace ACES
         {
             get
             {
-                return Rating;
+                return rating;
             }
             set
             {
                 switch (value)
                 {
                     case "Green":
-                        Rating = "Green";
+                        rating = "Green";
                         break;
                     case "Red":
-                        Rating = "Red";
+                        rating = "Red";
                         break;
                     case "Yellow":
                         yellowMarks++;
@@ -43,7 +48,7 @@ namespace ACES
                         {
                             if (yellowMarks >= 3)
                             {
-                                Rating = "Red";
+                                rating = "Red";
                             }
                         }
                         break;
@@ -84,17 +89,33 @@ namespace ACES
         /// </summary>
         public List<GitCommit> commits;
 
+        /// <summary>
+        /// Average time between commits in seconds
+        /// </summary>
+        public ulong avgTimeBetweenCommits { get; set; }
 
+        /// <summary>
+        /// The standard deviation of times between commits in seconds
+        /// </summary>
+        public int stdDev { get; set; }
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="name">Student Name</param>
+        /// <param name="userName">Student Username</param>
         public Student(string name, string userName)
         {
             Name = name;
-            Rating = "Green";
+            rating = "Green";
             GitHubUserName = userName;
             commits = new List<GitCommit>();
             StudentScore = new Score();
             ProjectLocation = "";
             NumStudentCommits = 0;
             yellowMarks = 0;
+            avgTimeBetweenCommits = 0;
+            stdDev = 0;
         }
 
     }
