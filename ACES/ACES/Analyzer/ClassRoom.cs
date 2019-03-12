@@ -29,6 +29,12 @@ namespace ACES
         /// Github interface layer
         /// </summary>
         private GitInterface git;
+
+        /// <summary>
+        /// The average std dev for the class
+        /// </summary>
+        public int avgStdDev { get; set; }
+
        
         /// <summary>
         /// Constructor

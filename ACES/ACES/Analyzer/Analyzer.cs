@@ -61,7 +61,16 @@ namespace ACES
                 student.StudentScore = CurrentSystem.BuildAssignment(projectLocation, unitTestLocation, gradingKey);
                 analyze(student);
             }
-        }
+
+            //Calculate the std dev for the class
+            int classStdDev = 0;
+            foreach (Student student in CurrentClass.Students)
+            {  
+                classStdDev += student.stdDev;
+            }
+
+            CurrentClass.avgStdDev = classStdDev;
+        }//run
 
         /// <summary>
         /// Returns a list of the students
@@ -88,6 +97,8 @@ namespace ACES
                 throw new Exception("Student list not populated");
             }
 
+            List<ulong> commitTimes = new List<ulong>();
+
             //run analysis on commits//////////////////
 
             bool authorFlag = false;
@@ -100,10 +111,12 @@ namespace ACES
                 if (commit.Author == "Default")
                 {
                     authorFlag = true;
+                    tempAuthorFlag = true;
                     student.NumStudentCommits++;
                 }
 
-                /*authorFlag shows that Default was found once, while
+                /*
+                * authorFlag shows that Default was found once, while
                 * tempAuthor flag shows that it was found each time
                 * If author flag is set, but temp isn't there was a change of
                 * author mid assignment. Red Flag
@@ -113,9 +126,18 @@ namespace ACES
                     student.Rating = "Red";
                 }
 
+                //Get the average time between commits
+                //First convert data time to time since the Unix epoch
+                TimeSpan t = (commit.CommitMessageDateTime - new DateTime(1970, 1, 1));
+                ulong timestamp = (ulong)t.TotalSeconds;
+                
+                //now store it
+                commitTimes.Add(timestamp);
+
             }//foreach
 
             //These values can be adjusted for sensitivity
+            //analyze number of commits
             if (student.NumStudentCommits < 2)
             {
                 student.Rating = "Red";
@@ -125,7 +147,42 @@ namespace ACES
                 student.Rating = "Yellow";
             }
 
+            //get the average between commits
+            student.avgTimeBetweenCommits = CalcAvgTime(commitTimes);
+
+            //now analyze
+            ulong max = commitTimes.Max();
+            ulong min = commitTimes.Min();
+            student.stdDev = (int) Math.Sqrt(commitTimes.Sum(x => Math.Pow(x - student.avgTimeBetweenCommits, 2)) 
+                / (commitTimes.Count - 1));
+            
         } //void analyze(Student student)
 
+        /// <summary>
+        /// Calculates the avg time between the times in the list
+        /// </summary>
+        /// <param name="times">A list of the times to average</param>
+        /// <returns>An average in a ulong</returns>
+        private ulong CalcAvgTime(List<ulong> times)
+        {
+            if (times.Count == 0)
+            {
+                return 0;
+            }
+
+            ulong avg = 0;
+
+            foreach (ulong time in times)
+            {
+                avg += time;
+            }
+
+            avg = avg / (ulong)times.Count;
+
+            return avg;
+        }
+
+        
     }//class 
+
 }//namespace
