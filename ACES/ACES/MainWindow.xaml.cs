@@ -1,4 +1,5 @@
 ﻿using ACES;
+using ACES.UserLogin;
 using ACES_GUI.CreateClass;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace ACES_GUI
     public partial class MainWindow : Window
     {
         ObservableCollection<ClassRoom> classList = new ObservableCollection<ClassRoom>();
+
+        UserInfo currentUser;
 
         public MainWindow()
         {
@@ -147,16 +150,7 @@ namespace ACES_GUI
 
         private async void RunChecks(object sender, RoutedEventArgs e)
         {
-            // teseting login 
-            //try
-            //{
-            //    UserInfo test = new UserInfo("Adamvans", "8my8w5PdYt92");
-            //    await test.login();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-            //}
+            
             
             // testing commit logging 
              classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
@@ -166,6 +160,20 @@ namespace ACES_GUI
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+        }
+
+        private void CreateLoginWindow(object sender, RoutedEventArgs e)
+        {
+            LoginWindow createWindow = new LoginWindow();
+            createWindow.Owner = this;
+            createWindow.ShowDialog();
+        }
+
+        internal void SetUser(string userName, string password)
+        {
+            currentUser = new UserInfo(userName, password);
+            createClassButton.IsEnabled = true;
+            checkFilesButton.IsEnabled = true;
         }
     }
 }
