@@ -43,6 +43,7 @@ namespace ACES_GUI
         //Datagrid for displaying students assignment scores, info, etc.
         private void RosterDataGrid()
         {
+            /*
             DataGridTextColumn col1 = new DataGridTextColumn();
             DataGridTextColumn col2 = new DataGridTextColumn();
             DataGridTextColumn col3 = new DataGridTextColumn();
@@ -73,7 +74,7 @@ namespace ACES_GUI
             col4.Header = "Avg Commit Time";
             col5.Header = "Std Dev";
             col6.Header = "Compiler Used";
-
+            */
         }
 
         private void SaveClassList()

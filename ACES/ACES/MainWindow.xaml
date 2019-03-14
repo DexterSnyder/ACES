@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACES_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="800">
+        Title="MainWindow" Height="450" Width="1025">
     <Grid>
         <Label Content="A.C.E.S." Margin="256,0,238,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="98"/>
-        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="684,272,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks" IsEnabled="False"/>
-        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="220" Margin="40,75,0,0" VerticalAlignment="Top" Width="500"/>
-        <Label Content="Class: " HorizontalAlignment="Left" Margin="591,72,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="639,72,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
-        <Label Content="Assignment: " HorizontalAlignment="Left" Margin="556,103,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="23" Margin="639,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="591,272,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
-        <Button x:Name="checkFilesButton_Copy" Content="Login" HorizontalAlignment="Left" Margin="684,15,0,0" VerticalAlignment="Top" Width="75" Click="CreateLoginWindow"/>
+        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="900,355,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks"/>
+        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="300" Margin="40,75,0,0" VerticalAlignment="Top" Width="700"/>
+        <Label Content="Class: " HorizontalAlignment="Left" Margin="807,78,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="855,78,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Label Content="Assignment: " HorizontalAlignment="Left" Margin="772,109,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="23" Margin="855,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="807,355,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
