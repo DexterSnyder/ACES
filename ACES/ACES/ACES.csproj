@@ -71,6 +71,9 @@
     <Compile Include="CreateClass\CreateClass.xaml.cs" />
     <Compile Include="Interface\GitInterface.cs" />
     <Compile Include="Interface\SystemInterface.cs" />
+    <Compile Include="NewUser.xaml.cs">
+      <DependentUpon>NewUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StudentDetails.xaml.cs">
       <DependentUpon>StudentDetails.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StudentDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

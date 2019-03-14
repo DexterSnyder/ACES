@@ -21,6 +21,10 @@ namespace ACES
     {
         private Student student;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="student">The student to display</param>
         public StudentDetails(Student student)
         {
             InitializeComponent();
@@ -37,6 +41,10 @@ namespace ACES
             
         }//constructor
 
+        /// <summary>
+        /// Sets the GUI to display the student
+        /// </summary>
+        /// <param name="student">The student to display</param>
         public void DisplayStudent(Student student)
         {
             //Set the ListBox
@@ -52,6 +60,7 @@ namespace ACES
             int minutes = seconds / 60;
             seconds = seconds % 60;
 
+            //set the GUI controls
             AvgTimeBetweenCommitsValue.Content = days + ":" + hours
                 + ":" + minutes + ":" + seconds;
 
@@ -64,6 +73,11 @@ namespace ACES
                 (student.StudentScore.numberCorrect + student.StudentScore.numberIncorrect);
         }
 
+        /// <summary>
+        /// Called on close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
