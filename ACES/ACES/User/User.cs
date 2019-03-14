@@ -19,14 +19,14 @@ namespace ACES
             this.password = password;
         }
 
-        async public Task login()
+        async public Task TestLogin()
         {
             GitHubClient client = new GitHubClient(new ProductHeaderValue("ACES"));
 
             client.Credentials = new Credentials(userName, password);
             try
             {
-                User user = await client.User.Get("adamvans");
+                User userToGet = await client.User.Get("adamvans");
             }
             catch (Exception ex)
             {
