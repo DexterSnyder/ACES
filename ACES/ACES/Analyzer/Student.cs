@@ -62,7 +62,7 @@ namespace ACES
         /// <summary>
         /// The number of times yellow has been assigned
         /// </summary>
-        private int yellowMarks;
+        public int yellowMarks { get; private set; }
 
         /// <summary>
         /// github user name

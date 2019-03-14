@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:ACES"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--
+                <ResourceDictionary Source="Themes/BureauBlack.xaml"/>
+                <ResourceDictionary Source="Themes/BureauBlue.xaml"/>
+                <ResourceDictionary Source="Themes/ExpressionLight.xaml"/>
+                <ResourceDictionary Source="Themes/WhistlerBlue.xaml"/>
+                -->
+                <ResourceDictionary Source="Themes/BureauBlack.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
