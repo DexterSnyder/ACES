@@ -32,12 +32,50 @@ namespace ACES_GUI
         public MainWindow()
         {
             InitializeComponent();
+
             GetClassList();
 
             SaveClassList();
             RosterDataGrid();
 
             classComboBox.ItemsSource = classList;
+        }
+
+        /// <summary>
+        /// TEST CODE!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// </summary>
+        private void testStudentDialog()
+        {
+            Student s = new Student("Billy Bob Jo Bob", "Hillbilly5@gmail.com");
+            s.avgTimeBetweenCommits = 6650;
+            s.stdDev = 55;
+            s.NumStudentCommits = 3;
+            s.Rating = "Red";
+            s.addReasonWhy("Red: They are big cheaters");
+            s.addReasonWhy("Yellow: Too few commits");
+            s.addReasonWhy("Yellow: Too short a time");
+            Score sScore = new Score();
+            sScore.numberCorrect = 100;
+            sScore.numberIncorrect = 0;
+            s.StudentScore = sScore;
+
+            StudentDetails sd = new StudentDetails(s);
+            sd.ShowDialog();
+
+            Student s2 = new Student("Joey Somedude", "Hillbilly5@gmail.com");
+            s2.avgTimeBetweenCommits = 10000;
+            s2.stdDev = 500;
+            s2.NumStudentCommits = 8;
+            s2.Rating = "Yellow";
+            s2.addReasonWhy("Yellow: Something, Something, Math");
+            Score sScore2 = new Score();
+            sScore2.numberCorrect = 80;
+            sScore2.numberIncorrect = 20;
+            s2.StudentScore = sScore2;
+
+            StudentDetails sd2 = new StudentDetails(s2);
+            sd2.ShowDialog();
+
         }
 
         //Datagrid for displaying students assignment scores, info, etc.

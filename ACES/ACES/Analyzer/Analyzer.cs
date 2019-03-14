@@ -63,13 +63,33 @@ namespace ACES
             }
 
             //Calculate the std dev for the class
-            int classStdDev = 0;
+            List<int> averages = new List<int>();
+            int classAvg = 0;
+            //loop through and get data for each student
             foreach (Student student in CurrentClass.Students)
             {  
-                classStdDev += student.stdDev;
+                classAvg += (int) student.avgTimeBetweenCommits;
+                averages.Add((int)student.avgTimeBetweenCommits);
             }
 
-            CurrentClass.avgStdDev = classStdDev;
+            //calculate the class average time between commits, and the standerd dev
+            //of the averages
+            classAvg = classAvg / CurrentClass.Students.Count();
+            CurrentClass.AvgStdDev = (int)Math.Sqrt(averages.Sum(x => Math.Pow(x - classAvg, 2))
+                / (CurrentClass.Students.Count() - 1));
+
+            int lowerThreshold = classAvg - (2 * CurrentClass.AvgStdDev);
+
+            //now, find the students with commits below the lower threshold
+            foreach (Student student in CurrentClass.Students)
+            {
+                if ( (int)student.avgTimeBetweenCommits < lowerThreshold)
+                {
+                    student.Rating = "Yellow";
+                    student.addReasonWhy("Yellow: Avg time between commits below threshold");
+                }
+            }
+
         }//run
 
         /// <summary>
@@ -124,6 +144,7 @@ namespace ACES
                 if (authorFlag && !tempAuthorFlag)
                 {
                     student.Rating = "Red";
+                    student.addReasonWhy("Red: Change in author mid assignment");
                 }
 
                 //Get the average time between commits
@@ -141,10 +162,12 @@ namespace ACES
             if (student.NumStudentCommits < 2)
             {
                 student.Rating = "Red";
+                student.addReasonWhy("Red: number of commits below threshold");
             }
             else if (student.NumStudentCommits < 5)
             {
                 student.Rating = "Yellow";
+                student.addReasonWhy("Yellow: number of commits below threshold");
             }
 
             //get the average between commits

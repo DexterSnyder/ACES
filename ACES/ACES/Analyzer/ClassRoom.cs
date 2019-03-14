@@ -33,7 +33,7 @@ namespace ACES
         /// <summary>
         /// The average std dev for the class
         /// </summary>
-        public int avgStdDev { get; set; }
+        public int AvgStdDev { get; set; }
 
        
         /// <summary>
