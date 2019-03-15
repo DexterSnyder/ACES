@@ -5,17 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACES_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1025">
+        Title="MainWindow" Height="450" Width="1167" Closing="SaveClassList">
     <Grid>
         <Label Content="A.C.E.S." Margin="256,0,238,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="98"/>
-        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="900,355,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks"/>
-        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="300" Margin="40,75,0,0" VerticalAlignment="Top" Width="700"/>
-        <Label Content="Class: " HorizontalAlignment="Left" Margin="807,78,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="855,78,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
-        <Label Content="Assignment: " HorizontalAlignment="Left" Margin="772,109,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="23" Margin="855,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="807,355,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="checkFilesButton_Copy" Content="Login" HorizontalAlignment="Left" Margin="900,20,0,0" VerticalAlignment="Top" Width="75" Click="CreateLoginWindow"/>
+        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="1056,369,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks" IsEnabled="False"/>
+        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="328" Margin="30,47,0,0" VerticalAlignment="Top" Width="819"/>
+        <Label Content="Class: " HorizontalAlignment="Left" Margin="963,92,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="1011,92,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Label Content="Assignment Name: " HorizontalAlignment="Left" Margin="886,123,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="1.552,0.654"/>
+        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="23" Margin="1011,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="941,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773" IsEnabled="False"/>
+        <Button x:Name="checkFilesButton_Copy" Content="GitHub Login" HorizontalAlignment="Left" Margin="1044,40,0,0" VerticalAlignment="Top" Width="87" Click="CreateLoginWindow"/>
+        <Label Content="Unit Test File:" HorizontalAlignment="Left" Margin="886,166,0,0" VerticalAlignment="Top" Width="82" RenderTransformOrigin="1.552,0.654"/>
+        <TextBox x:Name="UnitTestLocationBox" HorizontalAlignment="Left" Height="23" Margin="973,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+        <Button x:Name="browseUnitTestBtn" Content="Browse" HorizontalAlignment="Left" Margin="1080,197,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForUnitTest"/>
+        <Label Content="Student Repo Location:" HorizontalAlignment="Left" Margin="876,218,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="1.552,0.654"/>
+        <TextBox x:Name="RepoFolderBox" HorizontalAlignment="Left" Height="23" Margin="886,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245"/>
+        <Button x:Name="browseRepoFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="1080,277,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForRepoFolder"/>
 
     </Grid>
 </Window>

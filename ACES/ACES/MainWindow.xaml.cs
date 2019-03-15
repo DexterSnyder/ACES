@@ -1,6 +1,7 @@
 ﻿using ACES;
 using ACES.UserLogin;
 using ACES_GUI.CreateClass;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -29,15 +31,15 @@ namespace ACES_GUI
 
         UserInfo currentUser;
 
+        Analyzer Analyze; 
+
         public MainWindow()
         {
             InitializeComponent();
 
             GetClassList();
-
-            SaveClassList();
             RosterDataGrid();
-
+            Analyze = new Analyzer(); 
             classComboBox.ItemsSource = classList;
         }
 
@@ -115,7 +117,7 @@ namespace ACES_GUI
             */
         }
 
-        private void SaveClassList()
+        private void SaveClassList(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // create a default path that is only used in the program. 
             string path = "classlist.csv";
@@ -169,30 +171,18 @@ namespace ACES_GUI
             }
         }
 
-        private void test(object sender, RoutedEventArgs e)
-        {
-            classList.Add(new ClassRoom("DexterSnyderTestOrg", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting\\classroom_roster.csv"));
-
-            classList.First().CloneStudentRepositorys("assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
-        }
-
-        private void saveInfo(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            SaveClassList();
-        }
-
         private void CreateClass_Click(object sender, RoutedEventArgs e)
         {
             var createWindow = new CreateClass.CreateClass(classList);
             createWindow.ShowDialog();
         }
 
-        private async void RunChecks(object sender, RoutedEventArgs e)
+        private void RunChecks(object sender, RoutedEventArgs e)
         {
-            
-            
-            // testing commit logging 
-             classList[0].CloneStudentRepositorys("Assignment1", "C:\\Users\\Ethgar\\Documents\\School\\acesTesting", "Adamvans:8my8w5PdYt92");
+            string useKey = currentUser.userName + ":" + currentUser.password;
+
+            Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
+                            useKey, UnitTestLocationBox.Text, "gradeing key");
         }
 
 
@@ -213,6 +203,40 @@ namespace ACES_GUI
             currentUser = new UserInfo(userName, password);
             createClassButton.IsEnabled = true;
             checkFilesButton.IsEnabled = true;
+        }
+
+        private void BrowseForUnitTest(object sender, RoutedEventArgs e)
+        {
+            FileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == true)
+            { 
+                UnitTestLocationBox.Text = dialog.FileName;
+            }
+        }
+
+        private void BrowseForRepoFolder(object sender, RoutedEventArgs e)
+        {
+            var dlg = new CommonOpenFileDialog();
+            dlg.Title = "My Title";
+            dlg.IsFolderPicker = true;
+            dlg.InitialDirectory = Environment.CurrentDirectory;
+
+            dlg.AddToMostRecentlyUsedList = false;
+            dlg.AllowNonFileSystemItems = false;
+            dlg.DefaultDirectory = Environment.CurrentDirectory;
+            dlg.EnsureFileExists = true;
+            dlg.EnsurePathExists = true;
+            dlg.EnsureReadOnly = false;
+            dlg.EnsureValidNames = true;
+            dlg.Multiselect = false;
+            dlg.ShowPlacesList = true;
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                RepoFolderBox.Text = dlg.FileName;
+            }
+
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using ACES;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,11 +34,21 @@ namespace ACES_GUI.CreateClass
 
         private void createClassButton_Click(object sender, RoutedEventArgs e)
         {
-            ClassRoom testClass = new ClassRoom(classroomName.Text, rosterFile.Text);
+            ClassRoom testClass = new ClassRoom(classroomName.Text, rosterFileBox.Text);
 
             classList.Add(testClass);
             this.Close();
         }
 
+        private void BrowseForRoster(object sender, RoutedEventArgs e)
+        {
+            FileDialog dialog = new OpenFileDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                string fullPath = dialog.FileName;
+                rosterFileBox.Text = fullPath; 
+            }
+        }
     }
 }

@@ -29,7 +29,6 @@ namespace ACES
         public Analyzer ()
         {
             CurrentSystem = new SystemInterface();
-            CurrentClass = new ClassRoom("", "");
             hasRun = false;
         }
        
@@ -43,12 +42,12 @@ namespace ACES
         /// <param name="userkey">User key for GitHub</param>
         /// <param name="unitTestLocation">The file location of the instructors unit test</param>
         /// <param name="gradingKey">The security code used for grading</param>
-        public void run (string nameOfOrgansation, string rosterLocation, string assignmentName, 
-            string targetFolder, string userkey, string unitTestLocation, string gradingKey)
+        public void run (ClassRoom classforassign, string assignmentName, string targetFolder, 
+                              string userkey, string unitTestLocation, string gradingKey)
         {
             hasRun = true;
             //get the class list, and load it up
-            CurrentClass = new ClassRoom(nameOfOrgansation, rosterLocation);
+            CurrentClass = classforassign;
             CurrentClass.CloneStudentRepositorys(assignmentName, targetFolder, userkey);
 
             string projectLocation = "";
