@@ -130,7 +130,7 @@ namespace ACES_GUI
                     // write all data to the file. 
                     foreach (ClassRoom current in classList)
                     {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
                     }
 
                 }
@@ -144,7 +144,7 @@ namespace ACES_GUI
                     // write all data to the file. 
                     foreach (ClassRoom current in classList)
                     {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation);
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
                     }
                 }
             }
@@ -164,7 +164,7 @@ namespace ACES_GUI
                     while ((currentLine = sr.ReadLine()) != null && currentLine != "")
                     {
                         string[] items = currentLine.Split(',');
-                        classList.Add(new ClassRoom(items[0], items[1]));
+                        classList.Add(new ClassRoom(items[0], items[1], items[2]));
                     }
 
                 }

@@ -34,7 +34,7 @@ namespace ACES_GUI.CreateClass
 
         private void createClassButton_Click(object sender, RoutedEventArgs e)
         {
-            ClassRoom testClass = new ClassRoom(classroomName.Text, rosterFileBox.Text);
+            ClassRoom testClass = new ClassRoom(orgName.Text, rosterFileBox.Text, classroomName.Text);
 
             classList.Add(testClass);
             this.Close();

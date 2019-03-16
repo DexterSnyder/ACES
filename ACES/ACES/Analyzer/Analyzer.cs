@@ -42,22 +42,17 @@ namespace ACES
         /// <param name="userkey">User key for GitHub</param>
         /// <param name="unitTestLocation">The file location of the instructors unit test</param>
         /// <param name="gradingKey">The security code used for grading</param>
-        public void run (ClassRoom classforassign, string assignmentName, string targetFolder, 
+        public void run (ClassRoom CurrentClass, string assignmentName, string targetFolder, 
                               string userkey, string unitTestLocation, string gradingKey)
         {
             hasRun = true;
             //get the class list, and load it up
-            CurrentClass = classforassign;
             CurrentClass.CloneStudentRepositorys(assignmentName, targetFolder, userkey);
 
-            string projectLocation = "";
-            //pull projects from GitHub and build them
             foreach (Student student in CurrentClass.Students)
             {
-                //set the project location
-                projectLocation = targetFolder + "//" + student.Name;
                 //build each class and get a score
-                student.StudentScore = CurrentSystem.BuildAssignment(projectLocation, unitTestLocation, gradingKey);
+                student.StudentScore = CurrentSystem.BuildAssignment(student.ProjectLocation, unitTestLocation, gradingKey);
                 analyze(student);
             }
 

@@ -21,6 +21,11 @@ namespace ACES
         public string NameOfOrganization { get; set; }
 
         /// <summary>
+        /// Name of the class in the tool. 
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// The file location of the roster
         /// </summary>
         public string RosterLocation { get; set; }
@@ -41,10 +46,11 @@ namespace ACES
         /// </summary>
         /// <param name="nameOfOrgansation">Name of the GitHub organization</param>
         /// <param name="rosterLocation">File location of the roster</param>
-        public ClassRoom(string nameOfOrgansation, string rosterLocation)
+        public ClassRoom(string nameOfOrgansation, string rosterLocation, string name)
         {
             NameOfOrganization = nameOfOrgansation;
             RosterLocation = rosterLocation;
+            Name = name;
             Students = new ObservableCollection<Student>();
             GetStudentsFromRoster();
             git = new GitInterface();
@@ -103,7 +109,7 @@ namespace ACES
         override
         public string ToString()
         {
-            return NameOfOrganization;
+            return Name;
         }
 
     }//class
