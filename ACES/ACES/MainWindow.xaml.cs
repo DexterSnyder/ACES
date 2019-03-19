@@ -182,13 +182,21 @@ namespace ACES_GUI
             string useKey = currentUser.userName + ":" + currentUser.password;
 
             Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
-                            useKey, UnitTestLocationBox.Text, "gradeing key");
+                            useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
         }
 
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+            if ((ClassRoom)classComboBox.SelectedItem != null)
+            {
+                studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+            }
+            else
+            {
+                studentFilesList.ItemsSource = null;
+            }
+            
         }
 
         private void CreateLoginWindow(object sender, RoutedEventArgs e)
@@ -203,6 +211,8 @@ namespace ACES_GUI
             currentUser = new UserInfo(userName, password);
             createClassButton.IsEnabled = true;
             checkFilesButton.IsEnabled = true;
+            deleteClassBtn.IsEnabled = true;
+
         }
 
         private void BrowseForUnitTest(object sender, RoutedEventArgs e)
@@ -237,6 +247,12 @@ namespace ACES_GUI
                 RepoFolderBox.Text = dlg.FileName;
             }
 
+        }
+
+        private void DelClass_Click(object sender, RoutedEventArgs e)
+        {
+            classList.Remove((ClassRoom)classComboBox.SelectedItem);
+            classComboBox.ItemsSource = classList;
         }
     }
 }
