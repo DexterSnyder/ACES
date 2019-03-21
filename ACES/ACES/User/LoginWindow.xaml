@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         Title="Login" Height="198.178" Width="233.258">
     <Grid>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="18,136,0,0" VerticalAlignment="Top" Width="75" Click="TestPassword"/>
-        <TextBox x:Name="UserBox" HorizontalAlignment="Left" Height="23" Margin="86,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="UserBox" HorizontalAlignment="Left" Height="23" Margin="86,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" ToolTip="Your GitHub username"/>
         <Label Content="User Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,24,0,0" RenderTransformOrigin="1.141,0.615"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="86,68,0,0" VerticalAlignment="Top" Width="120" Height="23" ToolTip="Your GitHub password"/>
         <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,65,0,0" RenderTransformOrigin="1.141,0.615"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="18,136,0,0" VerticalAlignment="Top" Width="75" Click="TestPassword" IsDefault="True"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="131,136,0,0" VerticalAlignment="Top" Width="75"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="86,68,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-
     </Grid>
 </Window>
