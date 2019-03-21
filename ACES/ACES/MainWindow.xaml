@@ -8,13 +8,13 @@
         Title="MainWindow" Height="450" Width="1167" Closing="SaveClassList">
     <Grid>
         <Label Content="A.C.E.S." Margin="256,0,238,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="98"/>
-        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="1056,369,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks" IsEnabled="False"/>
+        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="1056,369,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks"/>
         <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="328" Margin="30,47,0,0" VerticalAlignment="Top" Width="819"/>
         <Label Content="Class: " HorizontalAlignment="Left" Margin="963,92,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="1011,92,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
         <Label Content="Assignment Name: " HorizontalAlignment="Left" Margin="894,126,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="1.552,0.654"/>
         <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="23" Margin="1011,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="963,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773" IsEnabled="False"/>
+        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="963,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773"/>
         <Button x:Name="checkFilesButton_Copy" Content="GitHub Login" HorizontalAlignment="Left" Margin="1044,40,0,0" VerticalAlignment="Top" Width="87" Click="CreateLoginWindow"/>
         <Label Content="Unit Test File:" HorizontalAlignment="Left" Margin="886,169,0,0" VerticalAlignment="Top" Width="82" RenderTransformOrigin="1.552,0.654"/>
         <TextBox x:Name="UnitTestLocationBox" HorizontalAlignment="Left" Height="23" Margin="968,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163"/>
@@ -22,7 +22,7 @@
         <Label Content="Student Repo Location:" HorizontalAlignment="Left" Margin="876,218,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="1.552,0.654"/>
         <TextBox x:Name="RepoFolderBox" HorizontalAlignment="Left" Height="23" Margin="886,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245"/>
         <Button x:Name="browseRepoFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="1080,277,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForRepoFolder"/>
-        <Button x:Name="deleteClassBtn" Click="DelClass_Click" Content="Delete Class" HorizontalAlignment="Left" Margin="876,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773" IsEnabled="False"/>
+        <Button x:Name="deleteClassBtn" Click="DelClass_Click" Content="Delete Class" HorizontalAlignment="Left" Margin="876,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773"/>
         <Label Content="Security Key:" HorizontalAlignment="Left" Margin="894,314,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.552,0.654" Height="21"/>
         <TextBox x:Name="SecurityKeyBox" HorizontalAlignment="Left" Height="23" Margin="973,314,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
 

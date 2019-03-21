@@ -41,6 +41,10 @@ namespace ACES_GUI
             RosterDataGrid();
             Analyze = new Analyzer(); 
             classComboBox.ItemsSource = classList;
+
+            createClassButton.Visibility = Visibility.Hidden;
+            checkFilesButton.Visibility = Visibility.Hidden;
+            deleteClassBtn.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -209,9 +213,10 @@ namespace ACES_GUI
         internal void SetUser(string userName, string password)
         {
             currentUser = new UserInfo(userName, password);
-            createClassButton.IsEnabled = true;
-            checkFilesButton.IsEnabled = true;
-            deleteClassBtn.IsEnabled = true;
+            createClassButton.Visibility = Visibility.Visible;
+            checkFilesButton.Visibility = Visibility.Visible;
+            deleteClassBtn.Visibility = Visibility.Visible;
+
 
         }
 
