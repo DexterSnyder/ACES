@@ -19,6 +19,9 @@ namespace ACES
         {
             foreach (Student current in students)
             {
+                // if repo not found dont get the data. 
+                bool repoFound = true;
+
                 // set student repo location
                 current.ProjectLocation = targetFolder + "\\" + current.Name;
 
@@ -42,20 +45,40 @@ namespace ACES
                 cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
                 //run get log command with flag to show changes 
-                cmd.StandardInput.WriteLine("git log --shortstat");
+                cmd.StandardInput.WriteLine("git log --shortstat --no-pager");
 
                 //exit command line to have a set number of lines of output 
                 cmd.StandardInput.WriteLine("exit");
+                cmd.WaitForExit();
+
+                // cycle though the lines of output until it runs out and get the last line 
+                while (!cmd.StandardError.EndOfStream)
+                {
+                    // check for errors 
+                    string error = cmd.StandardError.ReadLine();
+
+                    // if there is an error throw excption 
+                    if (error == "remote: Invalid username or password.")
+                    {
+                        throw new Exception("Invalid username or password.");
+                    }
+                    else if (error.Contains("fatal: repository") && error.Contains("not found"))
+                    {
+                        repoFound = false;
+                        Console.Error.Write("repository not found for user " + current.Name);
+                    }
+                }
 
                 // read first line of output for while condition 
                 string output = cmd.StandardOutput.ReadLine();
 
                 // cycle though the lines of output untill it runs out and get the last line 
-                while (output != null)
+                while (output != null && repoFound) // &&repoFound
                 {
                     // if it is the first line of a git log pull all log data 
                     if (output.Contains("Author:"))
                     {
+
                         // get git author on first line 
                         string author = output;
                         output = cmd.StandardOutput.ReadLine();
@@ -73,12 +96,24 @@ namespace ACES
                         // if only one commit massage line then this is the line changes.  
                         string linechanges = output;
 
-                        // if there is a multiline massage. pull lines until it finds the correct line. 
-                        while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
+                        if (linechanges.Contains("commit "))
                         {
-                            output = cmd.StandardOutput.ReadLine();
-                            output = cmd.StandardOutput.ReadLine();
-                            linechanges = output;
+                            linechanges = "";
+                        }
+                        else
+                        {
+                            // if there is a multiline massage. pull lines until it finds the correct line. 
+                            while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
+                            {
+                                output = cmd.StandardOutput.ReadLine();
+                                output = cmd.StandardOutput.ReadLine();
+                                linechanges = output;
+                                if (linechanges.Contains("commit "))
+                                {
+                                    linechanges = "";
+                                    break;
+                                }
+                            }
                         }
 
                         //  create new commit object 
@@ -90,31 +125,14 @@ namespace ACES
                         // add commit to commit list. 
                         current.commits.Add(commitData);
                     }
+
                     
-                    // get next line of output for next loop 
-                    output = cmd.StandardOutput.ReadLine();
+                     // get next line of output for next loop 
+                     output = cmd.StandardOutput.ReadLine();
+                    
+                    
                 }
-
-                // check for errors 
-                string error = cmd.StandardError.ReadLine();
-
-                // cycle though the lines of output until it runs out and get the last line 
-                while (error != null)
-                {
-                    // if there is an error throw excption 
-                    if (error == "remote: Invalid username or password.")
-                    {
-                        throw new Exception("Invalid username or password.");
-                    }
-                    else if (error.Contains("fatal: repository") && error.Contains("not found"))
-                    {
-                      
-                        Console.Error.Write("repository not found for user " + current.Name);
-                    }
-
-                    // get the last line in output.
-                    error = cmd.StandardError.ReadLine();
-                }
+                
 
                 // get number of total commits for student. 
                 current.NumStudentCommits = current.commits.Count;

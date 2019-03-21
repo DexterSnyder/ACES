@@ -48,6 +48,9 @@ namespace ACES
             CommitDateTime = new DateTime();
             CommitMessageDateTime = new DateTime();
             Author = "";
+            FilesChanged = 0;
+            LinesDeleted = 0;
+            LinesInserted = 0;
         }
 
         /// <summary>
@@ -60,7 +63,15 @@ namespace ACES
         public void PopulateDataFields(string date, string message, string author, string linechanges)
         {  // " 1 file changed, 3 insertions(+), 1 deletion(-)"
             CultureInfo provider = CultureInfo.InvariantCulture;
-            CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM dd HH:mm:ss yyyy zzz", provider);
+            if (date.Substring(5).Trim().Split()[2].Length == 1)
+            {
+                CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM d HH:mm:ss yyyy zzz", provider);
+            }
+            else
+            {
+                CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM dd HH:mm:ss yyyy zzz", provider);
+            }
+            
 
             string[] splitAuthor = author.Split();
 
@@ -70,21 +81,26 @@ namespace ACES
 
             string[] splitLineChanges = linechanges.Split(',');
 
-            FilesChanged = Int32.Parse(splitLineChanges[0].Split()[1]);
-
-            if (splitLineChanges[1].Contains("insertions"))  
+            if (splitLineChanges[0] != "")
             {
-                LinesInserted = Int32.Parse(splitLineChanges[1].Split()[1]);
+                FilesChanged = Int32.Parse(splitLineChanges[0].Split()[1]);
 
-                if (splitLineChanges.Length == 3)
+                if (splitLineChanges[1].Contains("insertions"))
                 {
-                    LinesDeleted = Int32.Parse(splitLineChanges[2].Split()[1]);
+                    LinesInserted = Int32.Parse(splitLineChanges[1].Split()[1]);
+
+                    if (splitLineChanges.Length == 3)
+                    {
+                        LinesDeleted = Int32.Parse(splitLineChanges[2].Split()[1]);
+                    }
+                }
+                else
+                {
+                    int LinesDeleted = Int32.Parse(splitLineChanges[1].Split()[1]);
                 }
             }
-            else
-            {
-                int LinesDeleted = Int32.Parse(splitLineChanges[1].Split()[1]);
-            }
+
+            
 
             try
             {
