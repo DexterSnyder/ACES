@@ -153,6 +153,38 @@ namespace ACES_GUI
                 }
             }
         }
+        private void SaveClassList()
+        {
+            // create a default path that is only used in the program. 
+            string path = "classlist.csv";
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    // write all data to the file. 
+                    foreach (ClassRoom current in classList)
+                    {
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                    }
+
+                }
+            }
+            else
+            {
+                // empty file if it exists 
+                File.WriteAllText(path, "");
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    // write all data to the file. 
+                    foreach (ClassRoom current in classList)
+                    {
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                    }
+                }
+            }
+        }
 
         private void GetClassList()
         {
@@ -179,6 +211,8 @@ namespace ACES_GUI
         {
             var createWindow = new CreateClass.CreateClass(classList);
             createWindow.ShowDialog();
+            SaveClassList();
+            classComboBox.SelectedIndex = classComboBox.Items.Count - 1;
         }
 
         private void RunChecks(object sender, RoutedEventArgs e)
@@ -235,11 +269,9 @@ namespace ACES_GUI
             var dlg = new CommonOpenFileDialog();
             dlg.Title = "My Title";
             dlg.IsFolderPicker = true;
-            dlg.InitialDirectory = Environment.CurrentDirectory;
 
             dlg.AddToMostRecentlyUsedList = false;
             dlg.AllowNonFileSystemItems = false;
-            dlg.DefaultDirectory = Environment.CurrentDirectory;
             dlg.EnsureFileExists = true;
             dlg.EnsurePathExists = true;
             dlg.EnsureReadOnly = false;
