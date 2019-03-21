@@ -291,5 +291,6 @@ namespace ACES_GUI
             classList.Remove((ClassRoom)classComboBox.SelectedItem);
             classComboBox.ItemsSource = classList;
         }
+
     }
 }
