@@ -291,5 +291,17 @@ namespace ACES_GUI
             classList.Remove((ClassRoom)classComboBox.SelectedItem);
             classComboBox.ItemsSource = classList;
         }
+
+        /// <summary>
+        /// Displays window based on selected student
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Row_DoubleClick (object sender, RoutedEventArgs e)
+        {
+            Student temp = (Student) studentFilesList.SelectedItem;
+            StudentDetails details = new StudentDetails(temp);
+            details.ShowDialog();
+        }
     }
 }
