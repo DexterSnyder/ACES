@@ -32,11 +32,57 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Rating}" Header="Rating" Width=".5*"/>
-                <DataGridTextColumn Binding="{Binding StudentScore}" Header="Score" Width=".5*" />
-                <DataGridTextColumn Binding="{Binding NumStudentCommits}" Header="Number of Commits" Width="*" />
-                <DataGridTextColumn Binding="{Binding avgTimeBetweenCommits}" Header="Avg Time Between Commits" />
-                <DataGridTextColumn Binding="{Binding stdDev}" Header="Standard Deviation" />
+                <DataGridTextColumn Binding="{Binding Rating}" Header="Rating" Width=".5*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Green">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Red">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Yellow">
+                                    <Setter Property="Background" Value="Yellow"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding StudentScore}" Header="Score" Width=".5*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding NumStudentCommits}" Header="Number of Commits" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding avgTimeBetweenCommits}" Header="Avg Time Between Commits">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding stdDev}" Header="Standard Deviation">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Class: " HorizontalAlignment="Left" Margin="814,88,0,0" VerticalAlignment="Top" ToolTip="Saved Classes"/>
