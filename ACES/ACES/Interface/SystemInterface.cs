@@ -43,7 +43,7 @@ namespace ACES
             cmd.StandardInput.WriteLine(deleteCmd);
 
             //Copy the instructors unit test
-            string moveCmd = "copy \"" + instructorUnitTests + "\" \"" + studentProjLocation + "\"";
+            string moveCmd = "copy /y \"" + instructorUnitTests + "\" \"" + studentProjLocation + "\"";
             cmd.StandardInput.WriteLine(moveCmd);
 
             //Build the project

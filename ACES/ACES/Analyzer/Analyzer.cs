@@ -168,8 +168,8 @@ namespace ACES
             student.avgTimeBetweenCommits = CalcAvgTime(commitTimes);
 
             //now analyze
-            ulong max = commitTimes.Max();
-            ulong min = commitTimes.Min();
+            ulong max = commitTimes.DefaultIfEmpty().Max();
+            ulong min = commitTimes.DefaultIfEmpty().Min();
             student.stdDev = (int) Math.Sqrt(commitTimes.Sum(x => Math.Pow(x - student.avgTimeBetweenCommits, 2)) 
                 / (commitTimes.Count - 1));
             
