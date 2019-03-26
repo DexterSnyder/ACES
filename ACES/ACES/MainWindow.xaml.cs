@@ -221,6 +221,8 @@ namespace ACES_GUI
 
             Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
                             useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
+
+            studentFilesList.Items.Refresh();
         }
 
 
