@@ -217,12 +217,47 @@ namespace ACES_GUI
 
         private void RunChecks(object sender, RoutedEventArgs e)
         {
+            assignTextBox.Background = Brushes.White;
+            UnitTestLocationBox.Background = Brushes.White;
+            RepoFolderBox.Background = Brushes.White;
+            SecurityKeyBox.Background = Brushes.White;
+
+            //Data validation
+            if (classComboBox.SelectedValue == null ||
+                classComboBox.SelectedValue.ToString() == "")
+            {
+                MessageBoxResult result = MessageBox.Show("Please select or create a class");
+                return;
+            }
+            if (assignTextBox.Text == null || assignTextBox.Text == "")
+            {
+                assignTextBox.Background = Brushes.Red;
+                return;
+            }
+            if (UnitTestLocationBox.Text == null || UnitTestLocationBox.Text == "")
+            {
+                UnitTestLocationBox.Background = Brushes.Red;
+                return;
+            }
+            if (RepoFolderBox.Text == null || RepoFolderBox.Text == "")
+            {
+                RepoFolderBox.Background = Brushes.Red;
+                return;
+            }
+            if (SecurityKeyBox.Text == null || SecurityKeyBox.Text == "")
+            {
+                SecurityKeyBox.Background = Brushes.Red;
+                return;
+            }
+            
+
+
             string useKey = currentUser.userName + ":" + currentUser.password;
 
             Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
                             useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
 
-            studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+            studentFilesList.Items.Refresh();
         }
 
 
