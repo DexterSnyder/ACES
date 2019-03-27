@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.IO;
 
 namespace ACES
 {
@@ -45,95 +47,105 @@ namespace ACES
                 cmd.StandardInput.WriteLine("cd " + targetFolder + "\\" + current.Name);
 
                 //run get log command with flag to show changes 
-                cmd.StandardInput.WriteLine("git log --shortstat --no-pager");
+                cmd.StandardInput.WriteLine("git log --shortstat");
 
                 //exit command line to have a set number of lines of output 
                 cmd.StandardInput.WriteLine("exit");
-                cmd.WaitForExit();
+
+                // read first line of output for while condition 
+                string output = cmd.StandardOutput.ReadLine();
+
+                List<String> outList = new List<String>();
+
+                while (output != null) // &&repoFound
+                {
+                    outList.Add(output);
+                    // get next line of output for next loop 
+                    output = cmd.StandardOutput.ReadLine();
+
+                }
+
+                // check for errors 
+                string error = cmd.StandardError.ReadLine();
+                List<String> errorList = new List<String>();
+                // cycle though the lines of error until it runs out and get the last line 
+                while (error != null)
+                {
+                    errorList.Add(error);
+                    error = cmd.StandardError.ReadLine();
+                }
 
                 // cycle though the lines of output until it runs out and get the last line 
-                while (!cmd.StandardError.EndOfStream)
+                foreach(string currentError in errorList)
                 {
-                    // check for errors 
-                    string error = cmd.StandardError.ReadLine();
-
+                   
                     // if there is an error throw excption 
-                    if (error == "remote: Invalid username or password.")
+                    if (currentError == "remote: Invalid username or password.")
                     {
                         throw new Exception("Invalid username or password.");
                     }
-                    else if (error.Contains("fatal: repository") && error.Contains("not found"))
+                    else if (currentError.Contains("fatal: repository") && error.Contains("not found"))
                     {
                         repoFound = false;
                         Console.Error.Write("repository not found for user " + current.Name);
                     }
                 }
 
-                // read first line of output for while condition 
-                string output = cmd.StandardOutput.ReadLine();
 
-                // cycle though the lines of output untill it runs out and get the last line 
-                while (output != null && repoFound) // &&repoFound
-                {
-                    // if it is the first line of a git log pull all log data 
-                    if (output.Contains("Author:"))
+                if (repoFound)
+                { 
+                    // cycle though the lines of output untill it runs out and get the last line 
+                    for(int c = 0; c < outList.Count; c++) // &&repoFound
                     {
-
-                        // get git author on first line 
-                        string author = output;
-                        output = cmd.StandardOutput.ReadLine();
-
-                        // get git commit date on third line  
-                        string date = output;
-                        output = cmd.StandardOutput.ReadLine();
-                        output = cmd.StandardOutput.ReadLine();
-
-                        // get git commit massage starting on sixth line  
-                        string massage = output.Trim();
-                        output = cmd.StandardOutput.ReadLine();
-                        output = cmd.StandardOutput.ReadLine();
-
-                        // if only one commit massage line then this is the line changes.  
-                        string linechanges = output;
-
-                        if (linechanges.Contains("commit "))
+                        // if it is the first line of a git log pull all log data 
+                        if (outList[c].Contains("Author:"))
                         {
-                            linechanges = "";
-                        }
-                        else
-                        {
-                            // if there is a multiline massage. pull lines until it finds the correct line. 
-                            while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
+
+                            // get git author on first line 
+                            string author = outList[c];
+                            c++;
+
+                            // get git commit date on third line  
+                            string date = outList[c];
+                            c = c + 2;
+
+                            // get git commit massage starting on sixth line  
+                            string massage = outList[c].Trim();
+                            c = c + 2;
+
+                            // if only one commit massage line then this is the line changes.  
+                            string linechanges = outList[c];
+
+                            if (linechanges.Contains("commit "))
                             {
-                                output = cmd.StandardOutput.ReadLine();
-                                output = cmd.StandardOutput.ReadLine();
-                                linechanges = output;
-                                if (linechanges.Contains("commit "))
+                                linechanges = "";
+                            }
+                            else
+                            {
+                                // if there is a multiline massage. pull lines until it finds the correct line. 
+                                while (!linechanges.Contains("file") && !linechanges.Contains("changed"))
                                 {
-                                    linechanges = "";
-                                    break;
+                                    c = c + 2;
+                                    linechanges = outList[c];
+                                    if (linechanges.Contains("commit "))
+                                    {
+                                        linechanges = "";
+                                        break;
+                                    }
                                 }
                             }
+
+                            //  create new commit object 
+                            GitCommit commitData = new GitCommit();
+
+                            // put parsed data into commit object 
+                            commitData.PopulateDataFields(date, massage ,author, linechanges);
+
+                            // add commit to commit list. 
+                            current.commits.Add(commitData);
                         }
-
-                        //  create new commit object 
-                        GitCommit commitData = new GitCommit();
-
-                        // put parsed data into commit object 
-                        commitData.PopulateDataFields(date, massage ,author, linechanges);
-
-                        // add commit to commit list. 
-                        current.commits.Add(commitData);
                     }
-
-                    
-                     // get next line of output for next loop 
-                     output = cmd.StandardOutput.ReadLine();
-                    
-                    
                 }
-                
-
                 // get number of total commits for student. 
                 current.NumStudentCommits = current.commits.Count;
               
