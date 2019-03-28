@@ -34,5 +34,10 @@ namespace ACES.UserLogin
 
             
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
