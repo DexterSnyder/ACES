@@ -47,10 +47,6 @@ namespace ACES
             string moveCmd = "copy \"" + instructorUnitTests + "\" \"" + studentProjLocation + "\" /Y";
             cmd.StandardInput.WriteLine(moveCmd);
 
-            ///////////////////////////////////////////////////////
-            //System.Threading.Thread.Sleep(30000);
-            //////////////////////////////////////////////////////////
-
             //Build the project
             string buildCmd = "cl /EHsc UnitTests_InstructorVersion.cpp";
             cmd.StandardInput.WriteLine(buildCmd);

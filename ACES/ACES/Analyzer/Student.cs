@@ -92,12 +92,12 @@ namespace ACES
         /// <summary>
         /// Average time between commits in seconds
         /// </summary>
-        public ulong avgTimeBetweenCommits { get; set; }
+        public double avgTimeBetweenCommits { get; set; }
 
         /// <summary>
         /// The standard deviation of times between commits in seconds
         /// </summary>
-        public int stdDev { get; set; }
+        public double stdDev { get; set; }
 
         private List<string> reasonsWhy;
 
