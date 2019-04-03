@@ -24,7 +24,7 @@
         <Button x:Name="browseRepoFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="226,277,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForRepoFolder"  Grid.Column="2"/>
         <TextBox x:Name="SecurityKeyBox" HorizontalAlignment="Left" Height="22" Margin="119,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" ToolTip="You security key, found in the instructor version of the unit tests"  Grid.Column="2"/>
         <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="202,369,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks"  Grid.Column="2"/>
-        <Label Content="A.C.E.S." HorizontalContentAlignment="Center" Margin="297,0,593.333,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="107" Grid.ColumnSpan="2" Grid.Column="1">
+        <Label Content="A.C.E.S." HorizontalContentAlignment="Center" Margin="435,0,190,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="107" Grid.Column="1">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -34,7 +34,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        
+
         <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="352" Margin="10,37,0,0" VerticalAlignment="Top" Width="702" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="1">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
