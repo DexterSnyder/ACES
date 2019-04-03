@@ -77,7 +77,7 @@ namespace ACES
 
             Author = splitAuthor[1];
 
-            string[] splitmassage = message.Split('-');
+            string[] splitmessage = message.Split('-');
 
             string[] splitLineChanges = linechanges.Split(',');
 
@@ -100,19 +100,76 @@ namespace ACES
                 }
             }
 
-            
-
             try
             {
-                CommitMessageDateTime = DateTime.ParseExact(splitmassage[0], "ddd MMM dd HH:mm:ss yyyy zzz", provider);
+                splitmessage[0].TrimEnd();
+                CommitMessageDateTime = DateTime.ParseExact(splitmessage[0].Trim(), "ddd MMM dd HH:mm:ss yyyy", provider);
 
-                Compiler = splitmassage[1];
+                //String[] tempDate = splitmessage[0].Split(' ');
+                //String[] tempTime = tempDate[3].Split(':');
+
+                //DateTime dateTime = new DateTime(Int32.Parse(tempDate[4]), monthToInt(tempDate[1]),
+                //Int32.Parse(tempDate[2]), Int32.Parse(tempTime[0]), Int32.Parse(tempTime[1]), Int32.Parse(tempTime[2]));
+
+                //CommitMessageDateTime = dateTime;
+
+                Compiler = splitmessage[1];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex);
-                Compiler = "not automatic massage";
+                Compiler = "not automatic message";
             }
+        }
+
+        private int monthToInt(String month)
+        {
+            int monthNum = 0;
+
+            switch (month)
+            {
+                case "Jan":
+                    monthNum = 1;
+                    break;
+                case "Feb":
+                    monthNum = 2;
+                    break;
+                case "Mar":
+                    monthNum = 3;
+                    break;
+                case "Apr":
+                    monthNum = 4;
+                    break;
+                case "May":
+                    monthNum = 5;
+                    break;
+                case "Jun":
+                    monthNum = 6;
+                    break;
+                case "Jul":
+                    monthNum = 7;
+                    break;
+                case "Aug":
+                    monthNum = 8;
+                    break;
+                case "Sep":
+                    monthNum = 9;
+                    break;
+                case "Oct":
+                    monthNum = 10;
+                    break;
+                case "Nov":
+                    monthNum = 11;
+                    break;
+                case "Dec":
+                    monthNum = 12;
+                    break;
+                default:
+                    Console.Write("Could not set month");
+                    break;
+            }
+
+            return monthNum;
         }
     }
 }

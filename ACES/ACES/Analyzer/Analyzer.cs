@@ -111,14 +111,21 @@ namespace ACES
                 throw new Exception("Student list not populated");
             }
 
-            List<ulong> commitTimes = new List<ulong>();
+            List<double> commitTimes = new List<double>();
 
             //run analysis on commits//////////////////
 
             bool authorFlag = false;
+            bool firstFlag = true;
             //first, check how many commits they have done
             foreach (GitCommit commit in student.commits)
             {
+                //check for instructor commits
+                if (commit.CommitMessageDateTime.Equals(new DateTime()))
+                {
+                    continue;
+                }
+
                 //Make sure that they have run the program, and 
                 //that the author doesn't switch mid work
                 bool tempAuthorFlag = false;
@@ -142,12 +149,22 @@ namespace ACES
                 }
 
                 //Get the average time between commits
-                //First convert data time to time since the Unix epoch
-                TimeSpan t = (commit.CommitMessageDateTime - new DateTime(1970, 1, 1));
-                ulong timestamp = (ulong)t.TotalSeconds;
-                
-                //now store it
-                commitTimes.Add(timestamp);
+                //first, handle if it is the first commit
+                if (firstFlag)
+                {
+                    commitTimes.Add(0);
+                    firstFlag = false;
+                }
+                else
+                {
+                    //Don't need a null check, no way to reach this code if commits[0] is null
+                    //The first commit serves as a "0" time frame
+                    TimeSpan t = (student.commits[0].CommitDateTime - commit.CommitMessageDateTime);
+                    double timeHours = (double)t.TotalHours;
+                    
+                    //now store it
+                    commitTimes.Add(timeHours);
+                }                
 
             }//foreach
 
@@ -167,8 +184,8 @@ namespace ACES
             //get the average between commits
             student.avgTimeBetweenCommits = CalcAvgTime(commitTimes);
 
-            ulong max = 0;
-            ulong min = 0;
+            double max = 0;
+            double min = 0;
 
             //now analyze
             if (commitTimes.Count() > 0)
@@ -187,21 +204,21 @@ namespace ACES
         /// </summary>
         /// <param name="times">A list of the times to average</param>
         /// <returns>An average in a ulong</returns>
-        private ulong CalcAvgTime(List<ulong> times)
+        private double CalcAvgTime(List<double> times)
         {
             if (times.Count == 0)
             {
                 return 0;
             }
 
-            ulong avg = 0;
+            double avg = 0;
 
-            foreach (ulong time in times)
+            foreach (double time in times)
             {
                 avg += time;
             }
 
-            avg = avg / (ulong)times.Count;
+            avg = avg / (double)times.Count;
 
             return avg;
         }
