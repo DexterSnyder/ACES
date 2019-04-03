@@ -100,22 +100,22 @@ namespace ACES
                 }
             }
 
-
-
             try
             {
-                splitmessage[0].Trim();
-                //CommitMessageDateTime = DateTime.ParseExact(splitmessage[0], "ddd MMM dd HH:mm:ss yyyy zzz", provider);
-                String[] tempDate = splitmessage[0].Split(' ');
-                String[] tempTime = tempDate[3].Split(':');
+                splitmessage[0].TrimEnd();
+                CommitMessageDateTime = DateTime.ParseExact(splitmessage[0].Trim(), "ddd MMM dd HH:mm:ss yyyy", provider);
 
-                DateTime dateTime = new DateTime(Int32.Parse(tempDate[4]), monthToInt(tempDate[1]),
-                    Int32.Parse(tempDate[2]), Int32.Parse(tempTime[0]), Int32.Parse(tempTime[1]), Int32.Parse(tempTime[2]));
+                //String[] tempDate = splitmessage[0].Split(' ');
+                //String[] tempTime = tempDate[3].Split(':');
 
-                CommitMessageDateTime = dateTime;
+                //DateTime dateTime = new DateTime(Int32.Parse(tempDate[4]), monthToInt(tempDate[1]),
+                //Int32.Parse(tempDate[2]), Int32.Parse(tempTime[0]), Int32.Parse(tempTime[1]), Int32.Parse(tempTime[2]));
+
+                //CommitMessageDateTime = dateTime;
+
                 Compiler = splitmessage[1];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.Write(ex);
                 Compiler = "not automatic message";

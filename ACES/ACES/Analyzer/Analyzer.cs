@@ -120,6 +120,12 @@ namespace ACES
             //first, check how many commits they have done
             foreach (GitCommit commit in student.commits)
             {
+                //check for instructor commits
+                if (commit.CommitMessageDateTime.Equals(new DateTime()))
+                {
+                    continue;
+                }
+
                 //Make sure that they have run the program, and 
                 //that the author doesn't switch mid work
                 bool tempAuthorFlag = false;
