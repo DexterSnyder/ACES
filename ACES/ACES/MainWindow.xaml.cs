@@ -41,6 +41,10 @@ namespace ACES_GUI
             RosterDataGrid();
             Analyze = new Analyzer(); 
             classComboBox.ItemsSource = classList;
+
+            createClassButton.Visibility = Visibility.Hidden;
+            checkFilesButton.Visibility = Visibility.Hidden;
+            deleteClassBtn.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -149,6 +153,38 @@ namespace ACES_GUI
                 }
             }
         }
+        private void SaveClassList()
+        {
+            // create a default path that is only used in the program. 
+            string path = "classlist.csv";
+
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    // write all data to the file. 
+                    foreach (ClassRoom current in classList)
+                    {
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                    }
+
+                }
+            }
+            else
+            {
+                // empty file if it exists 
+                File.WriteAllText(path, "");
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    // write all data to the file. 
+                    foreach (ClassRoom current in classList)
+                    {
+                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                    }
+                }
+            }
+        }
 
         private void GetClassList()
         {
@@ -175,14 +211,53 @@ namespace ACES_GUI
         {
             var createWindow = new CreateClass.CreateClass(classList);
             createWindow.ShowDialog();
+            SaveClassList();
+            classComboBox.SelectedIndex = classComboBox.Items.Count - 1;
         }
 
         private void RunChecks(object sender, RoutedEventArgs e)
         {
+            assignTextBox.Background = Brushes.White;
+            UnitTestLocationBox.Background = Brushes.White;
+            RepoFolderBox.Background = Brushes.White;
+            SecurityKeyBox.Background = Brushes.White;
+
+            //Data validation
+            if (classComboBox.SelectedValue == null ||
+                classComboBox.SelectedValue.ToString() == "")
+            {
+                MessageBoxResult result = MessageBox.Show("Please select or create a class");
+                return;
+            }
+            if (assignTextBox.Text == null || assignTextBox.Text == "")
+            {
+                assignTextBox.Background = Brushes.Red;
+                return;
+            }
+            if (UnitTestLocationBox.Text == null || UnitTestLocationBox.Text == "")
+            {
+                UnitTestLocationBox.Background = Brushes.Red;
+                return;
+            }
+            if (RepoFolderBox.Text == null || RepoFolderBox.Text == "")
+            {
+                RepoFolderBox.Background = Brushes.Red;
+                return;
+            }
+            if (SecurityKeyBox.Text == null || SecurityKeyBox.Text == "")
+            {
+                SecurityKeyBox.Background = Brushes.Red;
+                return;
+            }
+            
+
+
             string useKey = currentUser.userName + ":" + currentUser.password;
 
             Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
                             useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
+
+            studentFilesList.Items.Refresh();
         }
 
 
@@ -209,9 +284,10 @@ namespace ACES_GUI
         internal void SetUser(string userName, string password)
         {
             currentUser = new UserInfo(userName, password);
-            createClassButton.IsEnabled = true;
-            checkFilesButton.IsEnabled = true;
-            deleteClassBtn.IsEnabled = true;
+            createClassButton.Visibility = Visibility.Visible;
+            checkFilesButton.Visibility = Visibility.Visible;
+            deleteClassBtn.Visibility = Visibility.Visible;
+
 
         }
 
@@ -230,11 +306,9 @@ namespace ACES_GUI
             var dlg = new CommonOpenFileDialog();
             dlg.Title = "My Title";
             dlg.IsFolderPicker = true;
-            dlg.InitialDirectory = Environment.CurrentDirectory;
 
             dlg.AddToMostRecentlyUsedList = false;
             dlg.AllowNonFileSystemItems = false;
-            dlg.DefaultDirectory = Environment.CurrentDirectory;
             dlg.EnsureFileExists = true;
             dlg.EnsurePathExists = true;
             dlg.EnsureReadOnly = false;
@@ -253,6 +327,18 @@ namespace ACES_GUI
         {
             classList.Remove((ClassRoom)classComboBox.SelectedItem);
             classComboBox.ItemsSource = classList;
+        }
+
+        /// <summary>
+        /// Displays window based on selected student
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Row_DoubleClick (object sender, RoutedEventArgs e)
+        {
+            Student temp = (Student) studentFilesList.SelectedItem;
+            StudentDetails details = new StudentDetails(temp);
+            details.ShowDialog();
         }
     }
 }

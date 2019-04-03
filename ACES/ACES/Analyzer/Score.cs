@@ -15,5 +15,10 @@ namespace ACES
             numberCorrect = 0;
             numberIncorrect = 0;
         }
+
+        public override string ToString()
+        {
+            return numberCorrect + " / " + (numberCorrect + numberIncorrect);
+        }
     }
 }

@@ -5,26 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACES_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1300" Closing="SaveClassList">
+        Title="MainWindow" Height="500" Width="1025" Closing="SaveClassList">
     <Grid>
-        <Label Content="A.C.E.S." Margin="256,0,238,0" VerticalAlignment="Top" FontSize="32" HorizontalAlignment="Center" Width="98"/>
-        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="1186,527,0,0" VerticalAlignment="Top" Width="76" Click="RunChecks" IsEnabled="False"/>
-        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="500" Margin="30,47,0,0" VerticalAlignment="Top" Width="933"/>
-        <Label Content="Class: " HorizontalAlignment="Left" Margin="1093,122,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="1141,122,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged"/>
-        <Label Content="Assignment Name: " HorizontalAlignment="Left" Margin="1016,170,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="1.552,0.654"/>
-        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="24" Margin="1123,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
-        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="1098,527,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="1.107,0.773" IsEnabled="False"/>
-        <Button x:Name="checkFilesButton_Copy" Content="GitHub Login" HorizontalAlignment="Left" Margin="1174,47,0,0" VerticalAlignment="Top" Width="88" Click="CreateLoginWindow"/>
-        <Label Content="Unit Test File:" HorizontalAlignment="Left" Margin="1016,225,0,0" VerticalAlignment="Top" Width="82" RenderTransformOrigin="1.552,0.654"/>
-        <TextBox x:Name="UnitTestLocationBox" HorizontalAlignment="Left" Height="23" Margin="1098,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
-        <Button x:Name="browseUnitTestBtn" Content="Browse" HorizontalAlignment="Left" Margin="1210,253,0,0" VerticalAlignment="Top" Width="52" Click="BrowseForUnitTest"/>
-        <Label Content="Student Repo Location:" HorizontalAlignment="Left" Margin="1006,288,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="1.552,0.654"/>
-        <TextBox x:Name="RepoFolderBox" HorizontalAlignment="Left" Height="23" Margin="1016,319,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="246"/>
-        <Button x:Name="browseRepoFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="1210,347,0,0" VerticalAlignment="Top" Width="52" Click="BrowseForRepoFolder"/>
-        <Button x:Name="deleteClassBtn" Click="DelClass_Click" Content="Delete Class" HorizontalAlignment="Left" Margin="1006,527,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="1.107,0.773" IsEnabled="False"/>
-        <Label Content="Security Key:" HorizontalAlignment="Left" Margin="1024,404,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.552,0.654" Height="20"/>
-        <TextBox x:Name="SecurityKeyBox" HorizontalAlignment="Left" Height="22" Margin="1104,404,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="260*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="2"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="checkFilesButton_Copy" Content="GitHub Login" HorizontalAlignment="Left" Margin="190,41,0,0" VerticalAlignment="Top" Width="87" Click="CreateLoginWindow" Grid.Column="2"/>
+        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="157,78,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.457,-0.273" SelectionChanged="ComboBox_SelectionChanged" ToolTip="Saved Classes"  Grid.Column="2"/>
+        <TextBox x:Name="assignTextBox" HorizontalAlignment="Left" Height="24" Margin="157,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" ToolTip="The assignment name on GitHub"  Grid.Column="2"/>
+        <TextBox x:Name="UnitTestLocationBox" HorizontalAlignment="Left" Height="24" Margin="114,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163" ToolTip="The instructors version of the unit tests" Grid.Column="2"/>
+        <Button x:Name="browseUnitTestBtn" Content="Browse" HorizontalAlignment="Left" Margin="226,192,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForUnitTest"  Grid.Column="2"/>
+        <TextBox x:Name="RepoFolderBox" HorizontalAlignment="Left" Height="22" Margin="32,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245" ToolTip="Location to save the student repos"  Grid.Column="2"/>
+        <Button x:Name="browseRepoFolderBtn" Content="Browse" HorizontalAlignment="Left" Margin="226,277,0,0" VerticalAlignment="Top" Width="51" Click="BrowseForRepoFolder"  Grid.Column="2"/>
+        <TextBox x:Name="SecurityKeyBox" HorizontalAlignment="Left" Height="22" Margin="119,315,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="158" ToolTip="You security key, found in the instructor version of the unit tests"  Grid.Column="2"/>
+        <Button x:Name="checkFilesButton" Content="Check" HorizontalAlignment="Left" Margin="202,369,0,0" VerticalAlignment="Top" Width="75" Click="RunChecks"  Grid.Column="2"/>
+        <Label Content="A.C.E.S." HorizontalContentAlignment="Center" Margin="297,0,593.333,0" VerticalAlignment="Top" FontSize="24" HorizontalAlignment="Center" Width="107" Grid.ColumnSpan="2" Grid.Column="1">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.133"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="352" Margin="10,37,0,0" VerticalAlignment="Top" Width="702" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="1">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Student Name" Width="1.3*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Rating}" Header="Rating" Width=".5*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="Green">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Red">
+                                    <Setter Property="Background" Value="Red"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="Yellow">
+                                    <Setter Property="Background" Value="Yellow"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding StudentScore}" Header="Score" Width=".5*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding NumStudentCommits}" Header="Number of Commits" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding avgTimeBetweenCommits}" Header="Avg Time Between Commits">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding stdDev}" Header="Standard Deviation">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Class: " HorizontalAlignment="Left" Margin="109,78,0,0" VerticalAlignment="Top" ToolTip="Saved Classes"  Grid.Column="2"/>
+        <Label Content="Assignment Name: " HorizontalAlignment="Left" Margin="40,112,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="1.552,0.654" ToolTip="The assignment name on GitHub"  Grid.Column="2"/>
+        <Button x:Name="createClassButton" Click="CreateClass_Click" Content="Create Class" HorizontalAlignment="Left" Margin="109,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773"  Grid.Column="2"/>
+        <Label Content="Unit Test File:" HorizontalAlignment="Left" Margin="32,156,0,0" VerticalAlignment="Top" Width="82" RenderTransformOrigin="1.552,0.654" ToolTip="The instructors version of the unit tests"  Grid.Column="2"/>
+        <Label Content="Student Repo Location:" HorizontalAlignment="Left" Margin="22,219,0,0" VerticalAlignment="Top" Width="140" RenderTransformOrigin="1.552,0.654" ToolTip="Location to save the student repos"  Grid.Column="2"/>
+        <Button x:Name="deleteClassBtn" Click="DelClass_Click" Content="Delete Class" HorizontalAlignment="Left" Margin="22,369,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.107,0.773"  Grid.Column="2"/>
+        <Label Content="Security Key:" HorizontalAlignment="Left" Margin="40,315,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.552,0.654" Height="20" ToolTip="You security key, found in the instructor version of the unit tests"  Grid.Column="2"/>
 
     </Grid>
 </Window>

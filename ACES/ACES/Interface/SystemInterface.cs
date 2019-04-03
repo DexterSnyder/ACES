@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Threading;
 
 namespace ACES
 {
@@ -43,8 +44,12 @@ namespace ACES
             cmd.StandardInput.WriteLine(deleteCmd);
 
             //Copy the instructors unit test
-            string moveCmd = "copy \"" + instructorUnitTests + "\" \"" + studentProjLocation + "\"";
+            string moveCmd = "copy \"" + instructorUnitTests + "\" \"" + studentProjLocation + "\" /Y";
             cmd.StandardInput.WriteLine(moveCmd);
+
+            ///////////////////////////////////////////////////////
+            //System.Threading.Thread.Sleep(30000);
+            //////////////////////////////////////////////////////////
 
             //Build the project
             string buildCmd = "cl /EHsc UnitTests_InstructorVersion.cpp";
