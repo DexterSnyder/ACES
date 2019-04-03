@@ -35,7 +35,10 @@ namespace ACES
                 cmd.StartInfo.RedirectStandardError = true;
                 cmd.StartInfo.RedirectStandardInput = true;
                 cmd.Start();
-                
+
+                //create folder for repo 
+                cmd.StandardInput.WriteLine("md " + targetFolder + "\\" + current.Name);
+
                 // create git clone command 
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
                     + assignmentName + "-" + current.GitHubUserName + ".git " + targetFolder + "\\" + current.Name;
@@ -84,7 +87,7 @@ namespace ACES
                     {
                         throw new Exception("Invalid username or password.");
                     }
-                    else if (currentError.Contains("fatal: repository") && error.Contains("not found"))
+                    else if (currentError.Contains("fatal: repository") && currentError.Contains("not found"))
                     {
                         repoFound = false;
                         Console.Error.Write("repository not found for user " + current.Name);
@@ -146,8 +149,6 @@ namespace ACES
                         }
                     }
                 }
-                // get number of total commits for student. 
-                current.NumStudentCommits = current.commits.Count;
               
             }// for loop
 
