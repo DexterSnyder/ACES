@@ -103,6 +103,8 @@ namespace ACES
 
         public double Max { get; set; }
 
+        public string Compiler { get; set; }
+
         private List<string> reasonsWhy;
 
         /// <summary>
@@ -123,8 +125,9 @@ namespace ACES
             avgTimeBetweenCommits = 0;
             stdDev = 0;
             reasonsWhy = new List<string>();
-            min = 0;
-            max = 0;
+            Min = 0;
+            Max = 0;
+            Compiler = "";
         }
 
         /// <summary>
