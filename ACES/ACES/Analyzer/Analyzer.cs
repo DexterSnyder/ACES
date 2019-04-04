@@ -115,6 +115,7 @@ namespace ACES
 
             //run analysis on commits//////////////////
 
+            bool compilerChange = false;
             bool authorFlag = false;
             bool firstFlag = true;
             //first, check how many commits they have done
@@ -148,12 +149,16 @@ namespace ACES
                     student.addReasonWhy("Red: Change in author mid assignment");
                 }
 
+
                 //Get the average time between commits
                 //first, handle if it is the first commit
                 if (firstFlag)
                 {
                     commitTimes.Add(0);
                     firstFlag = false;
+
+                    //get the compiler
+                    student.Compiler = commit.Compiler;
                 }
                 else
                 {
@@ -164,7 +169,19 @@ namespace ACES
                     
                     //now store it
                     commitTimes.Add(timeHours);
-                }                
+
+                    //Check if compilers change
+                    /* if compiler change is true, we don't want to do anything so that they only
+                    get 1 yellow mark for it */
+                    if ((student.Compiler != commit.Compiler) && compilerChange == false)
+                    {
+                        student.Rating = "Yellow";
+                        student.addReasonWhy("Compiler changed mid assignment");
+                        student.Compiler = "Multiple";
+                        compilerChange = true;
+                    }
+                    
+                }//else
 
             }//foreach
 
