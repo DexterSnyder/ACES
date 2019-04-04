@@ -105,14 +105,6 @@ namespace ACES
                 splitmessage[0].TrimEnd();
                 CommitMessageDateTime = DateTime.ParseExact(splitmessage[0].Trim(), "ddd MMM dd HH:mm:ss yyyy", provider);
 
-                //String[] tempDate = splitmessage[0].Split(' ');
-                //String[] tempTime = tempDate[3].Split(':');
-
-                //DateTime dateTime = new DateTime(Int32.Parse(tempDate[4]), monthToInt(tempDate[1]),
-                //Int32.Parse(tempDate[2]), Int32.Parse(tempTime[0]), Int32.Parse(tempTime[1]), Int32.Parse(tempTime[2]));
-
-                //CommitMessageDateTime = dateTime;
-
                 Compiler = splitmessage[1];
             }
             catch (Exception ex)

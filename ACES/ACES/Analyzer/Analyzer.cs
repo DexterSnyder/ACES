@@ -194,8 +194,27 @@ namespace ACES
                 min = commitTimes.Min();
             }
             
-            student.stdDev = (int) Math.Sqrt(commitTimes.Sum(x => Math.Pow(x - student.avgTimeBetweenCommits, 2)) 
-                / (commitTimes.Count - 1));
+            //student.stdDev = (int) Math.Sqrt(commitTimes.Sum(x => Math.Pow(x - student.avgTimeBetweenCommits, 2)) 
+            //    / (commitTimes.Count - 1));
+
+            //redefined to make it clear
+            double mean = student.avgTimeBetweenCommits;
+            double mean2 = 0;
+
+            foreach (double time in commitTimes)
+            {
+                mean2 += Math.Pow((time - mean),2);
+            }
+
+            if (commitTimes.Count < 1)
+            {
+                student.stdDev = 0;
+                return;
+            }
+
+            double insideFormula = mean2 / (commitTimes.Count - 1);
+
+            student.stdDev = Math.Sqrt(insideFormula);
             
         } //void analyze(Student student)
 
