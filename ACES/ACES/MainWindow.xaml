@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ACES_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="1025" Closing="SaveClassList">
+        Title="MainWindow" Height="500" Width="1100" Closing="SaveClassList">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2"/>
@@ -35,7 +35,7 @@
             </Label.RenderTransform>
         </Label>
 
-        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="352" Margin="10,37,0,0" VerticalAlignment="Top" Width="702" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="1">
+        <DataGrid x:Name="studentFilesList" ItemsSource="{Binding Students}" HorizontalAlignment="Left" Height="352" Margin="10,37,0,0" VerticalAlignment="Top" Width="777" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="1" Grid.ColumnSpan="2">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
