@@ -52,7 +52,7 @@ namespace ACES
             ReasonsWhy.ItemsSource = temp;
 
             //Calculate the time. Integer division is done intentionally
-            int seconds = (int)student.avgTimeBetweenCommits;
+            int seconds = (int)student.AvgTimeBetweenCommits;
             int days = seconds / 86400;
             seconds = seconds % 86400;
             int hours = seconds / 3600;
@@ -66,11 +66,11 @@ namespace ACES
 
             StudentNameLabel.Content = student.Name;
             TotalNumCommitsValue.Content = student.NumStudentCommits;
-            StdDevCommitsValue.Content = student.stdDev;
+            StdDevCommitsValue.Content = student.StdDev;
             RatingValue.Content = student.Rating;
-            YellowMarksValue.Content = student.yellowMarks;
-            ScoreValue.Content = student.StudentScore.numberCorrect + " / " + 
-                (student.StudentScore.numberCorrect + student.StudentScore.numberIncorrect);
+            YellowMarksValue.Content = student.YellowMarks;
+            ScoreValue.Content = student.StudentScore.NumberCorrect + " / " + 
+                (student.StudentScore.NumberCorrect + student.StudentScore.NumberIncorrect);
         }
 
         /// <summary>

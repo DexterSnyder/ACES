@@ -14,7 +14,7 @@ namespace ACES
         public String Name { get; private set; }
 
         /// <summary>
-        ///Private backer for Rating
+        /// Private backer for Rating
         /// </summary>
         private string rating;
 
@@ -39,14 +39,14 @@ namespace ACES
                         rating = "Red";
                         break;
                     case "Yellow":
-                        yellowMarks++;
+                        YellowMarks++;
                         if (value == "Red")
                         {
                             break;
                         }
                         else
                         {
-                            if (yellowMarks >= 3)
+                            if (YellowMarks >= 3)
                             {
                                 rating = "Red";
                             }
@@ -62,7 +62,7 @@ namespace ACES
         /// <summary>
         /// The number of times yellow has been assigned
         /// </summary>
-        public int yellowMarks { get; private set; }
+        public int YellowMarks { get; private set; }
 
         /// <summary>
         /// github user name
@@ -87,24 +87,36 @@ namespace ACES
         /// <summary>
         /// List of the commits by this student
         /// </summary>
-        public List<GitCommit> commits;
+        public List<GitCommit> Commits;
 
         /// <summary>
         /// Average time between commits in seconds
         /// </summary>
-        public double avgTimeBetweenCommits { get; set; }
+        public double AvgTimeBetweenCommits { get; set; }
 
         /// <summary>
         /// The standard deviation of times between commits in seconds
         /// </summary>
-        public double stdDev { get; set; }
-
+        public double StdDev { get; set; }
+        
+        /// <summary>
+        /// The minimum of the time between commits
+        /// </summary>
         public double Min { get; set; }
 
+        /// <summary>
+        /// The maximum of the time between commits
+        /// </summary>
         public double Max { get; set; }
 
+        /// <summary>
+        /// The compiler the student used
+        /// </summary>
         public string Compiler { get; set; }
 
+        /// <summary>
+        /// This list contains the reasons why a student recived a yellow mark
+        /// </summary>
         private List<string> reasonsWhy;
 
         /// <summary>
@@ -117,13 +129,13 @@ namespace ACES
             Name = name;
             rating = "Green";
             GitHubUserName = userName;
-            commits = new List<GitCommit>();
+            Commits = new List<GitCommit>();
             StudentScore = new Score();
             ProjectLocation = "";
             NumStudentCommits = 0;
-            yellowMarks = 0;
-            avgTimeBetweenCommits = 0;
-            stdDev = 0;
+            YellowMarks = 0;
+            AvgTimeBetweenCommits = 0;
+            StdDev = 0;
             reasonsWhy = new List<string>();
             Min = 0;
             Max = 0;

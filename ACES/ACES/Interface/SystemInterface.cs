@@ -18,9 +18,10 @@ namespace ACES
         public Score BuildAssignment(string studentProjLocation, string instructorUnitTests, string securityCode)
         {
             Score tempScore = new Score();
-            tempScore.numberCorrect = 0;
-            tempScore.numberIncorrect = 0;
+            tempScore.NumberCorrect = 0;
+            tempScore.NumberIncorrect = 0;
 
+            //A process is used to run commands on the command line
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.UseShellExecute = false;
@@ -30,6 +31,7 @@ namespace ACES
             cmd.Start();
 
             //Set up the cmd prompt to run the VS tools
+            //TODO MODIFY THIS TO SUPPORT DIFFERENT VERSIONS OF VISUAL STUDIO
             string batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\"";
             cmd.StandardInput.WriteLine(batDirectory);
             string runBat = "vcvars32.bat";
@@ -78,6 +80,7 @@ namespace ACES
                 error = cmd.StandardError.ReadLine();
             }
 
+            //Count correct answers. Uses the security code the ensure that students can't write "Passed" to Command line
             string correctAnswer = securityCode + " Passed";
             foreach (var line in lines)
             {
@@ -85,12 +88,12 @@ namespace ACES
 
                 if (temp == "Failed test")
                 {
-                    tempScore.numberIncorrect++;
+                    tempScore.NumberIncorrect++;
                 }
 
                 if (temp == correctAnswer)
                 {
-                    tempScore.numberCorrect++;
+                    tempScore.NumberCorrect++;
                 }
 
             }

@@ -54,12 +54,12 @@ namespace ACES
         }
 
         /// <summary>
-        /// 
+        /// Populates the data fields in the class
         /// </summary>
-        /// <param name="date"></param>
-        /// <param name="message"></param>
-        /// <param name="author"></param>
-        /// <param name="linechanges"></param>
+        /// <param name="date">The data of the commit</param>
+        /// <param name="message">The commit message</param>
+        /// <param name="author">Commit author</param>
+        /// <param name="linechanges">Which lines were changed</param>
         public void PopulateDataFields(string date, string message, string author, string linechanges)
         {  // " 1 file changed, 3 insertions(+), 1 deletion(-)"
             CultureInfo provider = CultureInfo.InvariantCulture;
@@ -114,54 +114,5 @@ namespace ACES
             }
         }
 
-        private int monthToInt(String month)
-        {
-            int monthNum = 0;
-
-            switch (month)
-            {
-                case "Jan":
-                    monthNum = 1;
-                    break;
-                case "Feb":
-                    monthNum = 2;
-                    break;
-                case "Mar":
-                    monthNum = 3;
-                    break;
-                case "Apr":
-                    monthNum = 4;
-                    break;
-                case "May":
-                    monthNum = 5;
-                    break;
-                case "Jun":
-                    monthNum = 6;
-                    break;
-                case "Jul":
-                    monthNum = 7;
-                    break;
-                case "Aug":
-                    monthNum = 8;
-                    break;
-                case "Sep":
-                    monthNum = 9;
-                    break;
-                case "Oct":
-                    monthNum = 10;
-                    break;
-                case "Nov":
-                    monthNum = 11;
-                    break;
-                case "Dec":
-                    monthNum = 12;
-                    break;
-                default:
-                    Console.Write("Could not set month");
-                    break;
-            }
-
-            return monthNum;
-        }
     }
 }

@@ -27,18 +27,29 @@ namespace ACES_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// A list of the saved classes
+        /// </summary>
         ObservableCollection<ClassRoom> classList = new ObservableCollection<ClassRoom>();
 
+        /// <summary>
+        /// Stores the users GitHub user name and password
+        /// </summary>
         UserInfo currentUser;
 
+        /// <summary>
+        /// The object that contains the methods to do the buisness logic
+        /// </summary>
         Analyzer Analyze; 
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
 
             GetClassList();
-            RosterDataGrid();
             Analyze = new Analyzer(); 
             classComboBox.ItemsSource = classList;
 
@@ -48,79 +59,10 @@ namespace ACES_GUI
         }
 
         /// <summary>
-        /// TEST CODE!!!!!!!!!!!!!!!!!!!!!!!!!
+        /// Saves the .csv files that contains the saved classes
         /// </summary>
-        private void testStudentDialog()
-        {
-            Student s = new Student("Billy Bob Jo Bob", "Hillbilly5@gmail.com");
-            s.avgTimeBetweenCommits = 6650;
-            s.stdDev = 55;
-            s.NumStudentCommits = 3;
-            s.Rating = "Red";
-            s.addReasonWhy("Red: They are big cheaters");
-            s.addReasonWhy("Yellow: Too few commits");
-            s.addReasonWhy("Yellow: Too short a time");
-            Score sScore = new Score();
-            sScore.numberCorrect = 100;
-            sScore.numberIncorrect = 0;
-            s.StudentScore = sScore;
-
-            StudentDetails sd = new StudentDetails(s);
-            sd.ShowDialog();
-
-            Student s2 = new Student("Joey Somedude", "Hillbilly5@gmail.com");
-            s2.avgTimeBetweenCommits = 10000;
-            s2.stdDev = 500;
-            s2.NumStudentCommits = 8;
-            s2.Rating = "Yellow";
-            s2.addReasonWhy("Yellow: Something, Something, Math");
-            Score sScore2 = new Score();
-            sScore2.numberCorrect = 80;
-            sScore2.numberIncorrect = 20;
-            s2.StudentScore = sScore2;
-
-            StudentDetails sd2 = new StudentDetails(s2);
-            sd2.ShowDialog();
-
-        }
-
-        //Datagrid for displaying students assignment scores, info, etc.
-        private void RosterDataGrid()
-        {
-            /*
-            DataGridTextColumn col1 = new DataGridTextColumn();
-            DataGridTextColumn col2 = new DataGridTextColumn();
-            DataGridTextColumn col3 = new DataGridTextColumn();
-            DataGridTextColumn col4 = new DataGridTextColumn();
-            DataGridTextColumn col5 = new DataGridTextColumn();
-            DataGridTextColumn col6 = new DataGridTextColumn();
-           // studentFilesList.Columns.Add(col1);
-            studentFilesList.Columns.Add(col2);
-            studentFilesList.Columns.Add(col3);
-            studentFilesList.Columns.Add(col4);
-            studentFilesList.Columns.Add(col5);
-            studentFilesList.Columns.Add(col6);
-            //col1.Binding = new Binding("Name");
-            col2.Binding = new Binding("Tests Passed");
-            col3.Binding = new Binding("Commits");
-            col4.Binding = new Binding("Avg Commit Time");
-            col5.Binding = new Binding("Std Dev");
-            col6.Binding = new Binding("Compiler Used");
-           // col1.Width = 83.33;
-            col2.Width = 83.33;
-            col3.Width = 83.33;
-            col4.Width = 83.33;
-            col4.Width = 83.33;
-            col4.Width = 83.33;
-           // col1.Header = "Name";
-            col2.Header = "Tests Passed";
-            col3.Header = "Commits";
-            col4.Header = "Avg Commit Time";
-            col5.Header = "Std Dev";
-            col6.Header = "Compiler Used";
-            */
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveClassList(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // create a default path that is only used in the program. 
@@ -153,6 +95,10 @@ namespace ACES_GUI
                 }
             }
         }
+
+        /// <summary>
+        /// Saves a .csv file that contains the saved classes
+        /// </summary>
         private void SaveClassList()
         {
             // create a default path that is only used in the program. 
@@ -186,6 +132,9 @@ namespace ACES_GUI
             }
         }
 
+        /// <summary>
+        /// Gets the classes saved by the user in the .csv file
+        /// </summary>
         private void GetClassList()
         {
             // create a default path that is only used in the program. 
@@ -207,6 +156,11 @@ namespace ACES_GUI
             }
         }
 
+        /// <summary>
+        /// On click button that opens the window to create a class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateClass_Click(object sender, RoutedEventArgs e)
         {
             var createWindow = new CreateClass.CreateClass(classList);
@@ -215,6 +169,11 @@ namespace ACES_GUI
             classComboBox.SelectedIndex = classComboBox.Items.Count - 1;
         }
 
+        /// <summary>
+        /// Runs the checks to analyze the students
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RunChecks(object sender, RoutedEventArgs e)
         {
             assignTextBox.Background = Brushes.White;
@@ -260,7 +219,11 @@ namespace ACES_GUI
             studentFilesList.Items.Refresh();
         }
 
-
+        /// <summary>
+        /// updates the students that are displayed when the selected class is changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if ((ClassRoom)classComboBox.SelectedItem != null)
@@ -274,6 +237,11 @@ namespace ACES_GUI
             
         }
 
+        /// <summary>
+        /// Opens a window for the user to log into GitHub
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateLoginWindow(object sender, RoutedEventArgs e)
         {
             LoginWindow createWindow = new LoginWindow();
@@ -281,6 +249,12 @@ namespace ACES_GUI
             createWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Opens the window that allows the user to log into GitHub
+        /// Displays the buttons once the user logs in
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
         internal void SetUser(string userName, string password)
         {
             currentUser = new UserInfo(userName, password);
@@ -291,6 +265,11 @@ namespace ACES_GUI
 
         }
 
+        /// <summary>
+        /// Opens the browser to allow the user to select the unit test file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BrowseForUnitTest(object sender, RoutedEventArgs e)
         {
             FileDialog dialog = new OpenFileDialog();
@@ -301,6 +280,11 @@ namespace ACES_GUI
             }
         }
 
+        /// <summary>
+        /// Opens hte browser to allow the user to select the location to clone student repos too
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BrowseForRepoFolder(object sender, RoutedEventArgs e)
         {
             var dlg = new CommonOpenFileDialog();
@@ -323,6 +307,11 @@ namespace ACES_GUI
 
         }
 
+        /// <summary>
+        /// On click that deletes a class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DelClass_Click(object sender, RoutedEventArgs e)
         {
             classList.Remove((ClassRoom)classComboBox.SelectedItem);

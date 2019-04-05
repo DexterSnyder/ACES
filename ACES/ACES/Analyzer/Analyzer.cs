@@ -21,6 +21,9 @@ namespace ACES
         /// </summary>
         public SystemInterface CurrentSystem { get; private set; }
 
+        /// <summary>
+        /// Shows if the run() method has been called
+        /// </summary>
         private bool hasRun;
 
         /// <summary>
@@ -62,8 +65,8 @@ namespace ACES
             //loop through and get data for each student
             foreach (Student student in CurrentClass.Students)
             {  
-                classAvg += (int) student.avgTimeBetweenCommits;
-                averages.Add((int)student.avgTimeBetweenCommits);
+                classAvg += (int) student.AvgTimeBetweenCommits;
+                averages.Add((int)student.AvgTimeBetweenCommits);
             }
 
             //calculate the class average time between commits, and the standerd dev
@@ -77,7 +80,7 @@ namespace ACES
             //now, find the students with commits below the lower threshold
             foreach (Student student in CurrentClass.Students)
             {
-                if ( (int)student.avgTimeBetweenCommits < lowerThreshold)
+                if ( (int)student.AvgTimeBetweenCommits < lowerThreshold)
                 {
                     student.Rating = "Yellow";
                     student.addReasonWhy("Yellow: Avg time between commits below threshold");
@@ -119,7 +122,7 @@ namespace ACES
             bool authorFlag = false;
             bool firstFlag = true;
             //first, check how many commits they have done
-            foreach (GitCommit commit in student.commits)
+            foreach (GitCommit commit in student.Commits)
             {
                 //check for instructor commits
                 if (commit.CommitMessageDateTime.Equals(new DateTime()))
@@ -164,7 +167,7 @@ namespace ACES
                 {
                     //Don't need a null check, no way to reach this code if commits[0] is null
                     //The first commit serves as a "0" time frame
-                    TimeSpan t = (student.commits[0].CommitDateTime - commit.CommitMessageDateTime);
+                    TimeSpan t = (student.Commits[0].CommitDateTime - commit.CommitMessageDateTime);
                     double timeHours = (double)t.TotalHours;
                     
                     //now store it
@@ -199,7 +202,7 @@ namespace ACES
             }
 
             //get the average between commits
-            student.avgTimeBetweenCommits = CalcAvgTime(commitTimes);
+            student.AvgTimeBetweenCommits = CalcAvgTime(commitTimes);
 
             //now analyze
             if (commitTimes.Count() > 0)
@@ -209,7 +212,7 @@ namespace ACES
             }
 
             //redefined to make it clear
-            double mean = student.avgTimeBetweenCommits;
+            double mean = student.AvgTimeBetweenCommits;
             double mean2 = 0;
 
             foreach (double time in commitTimes)
@@ -219,13 +222,13 @@ namespace ACES
 
             if (commitTimes.Count < 1)
             {
-                student.stdDev = 0;
+                student.StdDev = 0;
                 return;
             }
 
             double insideFormula = mean2 / (commitTimes.Count - 1);
 
-            student.stdDev = Math.Sqrt(insideFormula);
+            student.StdDev = Math.Sqrt(insideFormula);
             
         } //void analyze(Student student)
 
