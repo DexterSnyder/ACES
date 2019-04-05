@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace ACES
 {
@@ -31,8 +32,27 @@ namespace ACES
             cmd.Start();
 
             //Set up the cmd prompt to run the VS tools
-            //TODO MODIFY THIS TO SUPPORT DIFFERENT VERSIONS OF VISUAL STUDIO
-            string batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\"";
+            string batDirectory = "";
+            //MODIFY THIS TO SUPPORT DIFFERENT VERSIONS OF VISUAL STUDIO
+            //Only 2017 is supported
+            if (Directory.Exists("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build"))
+            {
+                batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\"";
+            }
+            else if (Directory.Exists("C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Enterprise\\VC\\Auxiliary\\Build"))
+            {
+                batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Enterprise\\VC\\Auxiliary\\Build\"";
+            }
+            else if (Directory.Exists( "C:\\Program Files (x86)\\Microsoft Visual Studio\\2013\\Enterprise\\VC\\Auxiliary\\Build"))
+            {
+                batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2013\\Enterprise\\VC\\Auxiliary\\Build\"";
+            }
+            else
+            {
+                throw new Exception("Compiler not supported");
+            }
+
+            //This runs a special cmd prompt that allows us to build using the VS compiler
             cmd.StandardInput.WriteLine(batDirectory);
             string runBat = "vcvars32.bat";
             cmd.StandardInput.WriteLine(runBat);
