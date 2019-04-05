@@ -8,17 +8,32 @@ namespace ACES
 {
     public class Score
     {
-        public int numberCorrect;
-        public int numberIncorrect;
+        /// <summary>
+        /// The total number of tests that the student passed
+        /// </summary>
+        public int NumberCorrect;
+
+        /// <summary>
+        /// The total number of tests that the student failed
+        /// </summary>
+        public int NumberIncorrect;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Score()
         {
-            numberCorrect = 0;
-            numberIncorrect = 0;
+            NumberCorrect = 0;
+            NumberIncorrect = 0;
         }
 
+        /// <summary>
+        /// Overwritten so that it displays correctly in the GUI
+        /// </summary>
+        /// <returns>A string in the format of correct / total</returns>
         public override string ToString()
         {
-            return numberCorrect + " / " + (numberCorrect + numberIncorrect);
+            return NumberCorrect + " / " + (NumberCorrect + NumberIncorrect);
         }
     }
 }

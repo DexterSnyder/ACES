@@ -145,7 +145,7 @@ namespace ACES
                             commitData.PopulateDataFields(date, massage ,author, linechanges);
 
                             // add commit to commit list. 
-                            current.commits.Add(commitData);
+                            current.Commits.Add(commitData);
                         }
                     }
                 }

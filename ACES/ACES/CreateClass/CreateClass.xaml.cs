@@ -25,6 +25,10 @@ namespace ACES_GUI.CreateClass
     {
         ObservableCollection<ClassRoom> classList;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="cl"></param>
         public CreateClass(ObservableCollection<ClassRoom> cl)
         {
             InitializeComponent();
@@ -32,6 +36,11 @@ namespace ACES_GUI.CreateClass
             classList = cl;
         }
 
+        /// <summary>
+        /// On click for the create class button. Creates a new class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createClassButton_Click(object sender, RoutedEventArgs e)
         {
             ClassRoom testClass = new ClassRoom(orgName.Text, rosterFileBox.Text, classroomName.Text);
@@ -40,6 +49,11 @@ namespace ACES_GUI.CreateClass
             this.Close();
         }
 
+        /// <summary>
+        /// Allows the user to browes for a roster file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BrowseForRoster(object sender, RoutedEventArgs e)
         {
             FileDialog dialog = new OpenFileDialog();
