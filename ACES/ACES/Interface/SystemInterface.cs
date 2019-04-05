@@ -35,15 +35,15 @@ namespace ACES
             string batDirectory = "";
             //MODIFY THIS TO SUPPORT DIFFERENT VERSIONS OF VISUAL STUDIO
             //Only 2017 is supported
-            if (Directory.Exists("cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\""))
+            if (Directory.Exists("C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build"))
             {
                 batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\"";
             }
-            else if (Directory.Exists("cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Enterprise\\VC\\Auxiliary\\Build\""))
+            else if (Directory.Exists("C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Enterprise\\VC\\Auxiliary\\Build"))
             {
                 batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Enterprise\\VC\\Auxiliary\\Build\"";
             }
-            else if (Directory.Exists("cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2013\\Enterprise\\VC\\Auxiliary\\Build\""))
+            else if (Directory.Exists( "C:\\Program Files (x86)\\Microsoft Visual Studio\\2013\\Enterprise\\VC\\Auxiliary\\Build"))
             {
                 batDirectory = "cd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2013\\Enterprise\\VC\\Auxiliary\\Build\"";
             }
