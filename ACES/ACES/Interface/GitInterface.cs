@@ -39,6 +39,11 @@ namespace ACES
                 //create folder for repo 
                 cmd.StandardInput.WriteLine("md " + targetFolder + "\\" + current.Name);
 
+                if (userkey.Contains("#"))
+                {
+                    userkey = userkey.Substring(0, userkey.IndexOf("#")) + "\\" + userkey.Substring(userkey.IndexOf("#"));
+                }
+
                 // create git clone command 
                 string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/" 
                     + assignmentName + "-" + current.GitHubUserName + ".git " + targetFolder + "\\" + current.Name;
