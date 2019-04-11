@@ -11,7 +11,7 @@ namespace ACES
     /// </summary>
     public class GitInterface
     {
-        
+
         /// <summary>
         /// Clone the student repo's onto the local machine
         /// </summary>
@@ -41,8 +41,10 @@ namespace ACES
                     cmd.StartInfo.RedirectStandardInput = true;
                     cmd.Start();
 
-                    //create folder for repo 
-                    cmd.StandardInput.WriteLine("md " + targetFolder + "\\" + current.Name);
+                    if (userkey.Contains("#"))
+                    {
+                        userkey = userkey.Substring(0, userkey.IndexOf("#")) + "\\" + userkey.Substring(userkey.IndexOf("#"));
+                    }
 
                     // create git clone command 
                     string gitClone = "git clone https://" + userkey + "@github.com/" + nameOfOrganization + "/"
@@ -164,7 +166,7 @@ namespace ACES
             }
         }
 
-        
+
 
     }//class
 }//namespace
