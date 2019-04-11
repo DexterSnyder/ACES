@@ -158,7 +158,15 @@ namespace ACES
         /// <param name="reason">The reason for the rating</param>
         public void addReasonWhy(string reason)
         {
-            reasonsWhy.Add(reason);
+            try
+            {
+                reasonsWhy.Add(reason);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
+            }
         }
     }
 }

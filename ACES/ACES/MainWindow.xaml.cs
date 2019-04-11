@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Reflection;
 
 namespace ACES_GUI
 {
@@ -65,34 +66,42 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void SaveClassList(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // create a default path that is only used in the program. 
-            string path = "classlist.csv";
-
-            if (!File.Exists(path))
+            try
             {
-                // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    // write all data to the file. 
-                    foreach (ClassRoom current in classList)
-                    {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
-                    }
+                // create a default path that is only used in the program. 
+                string path = "classlist.csv";
 
+                if (!File.Exists(path))
+                {
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        // write all data to the file. 
+                        foreach (ClassRoom current in classList)
+                        {
+                            sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                        }
+
+                    }
+                }
+                else
+                {
+                    // empty file if it exists 
+                    File.WriteAllText(path, "");
+                    using (StreamWriter sw = new StreamWriter(path))
+                    {
+                        // write all data to the file. 
+                        foreach (ClassRoom current in classList)
+                        {
+                            sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                        }
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // empty file if it exists 
-                File.WriteAllText(path, "");
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    // write all data to the file. 
-                    foreach (ClassRoom current in classList)
-                    {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
-                    }
-                }
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -101,34 +110,42 @@ namespace ACES_GUI
         /// </summary>
         private void SaveClassList()
         {
-            // create a default path that is only used in the program. 
-            string path = "classlist.csv";
-
-            if (!File.Exists(path))
+            try
             {
-                // Create a file to write to.
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    // write all data to the file. 
-                    foreach (ClassRoom current in classList)
-                    {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
-                    }
+                // create a default path that is only used in the program. 
+                string path = "classlist.csv";
 
+                if (!File.Exists(path))
+                {
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        // write all data to the file. 
+                        foreach (ClassRoom current in classList)
+                        {
+                            sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                        }
+
+                    }
+                }
+                else
+                {
+                    // empty file if it exists 
+                    File.WriteAllText(path, "");
+                    using (StreamWriter sw = new StreamWriter(path))
+                    {
+                        // write all data to the file. 
+                        foreach (ClassRoom current in classList)
+                        {
+                            sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
+                        }
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // empty file if it exists 
-                File.WriteAllText(path, "");
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    // write all data to the file. 
-                    foreach (ClassRoom current in classList)
-                    {
-                        sw.WriteLine(current.NameOfOrganization + "," + current.RosterLocation + "," + current.Name);
-                    }
-                }
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -137,22 +154,30 @@ namespace ACES_GUI
         /// </summary>
         private void GetClassList()
         {
-            // create a default path that is only used in the program. 
-            string path = "classlist.csv";
-
-            if (File.Exists(path))
+            try
             {
-                // Create a file to write to.
-                using (StreamReader sr = File.OpenText(path))
-                {
-                    string currentLine = "";
-                    while ((currentLine = sr.ReadLine()) != null && currentLine != "")
-                    {
-                        string[] items = currentLine.Split(',');
-                        classList.Add(new ClassRoom(items[0], items[1], items[2]));
-                    }
+                // create a default path that is only used in the program. 
+                string path = "classlist.csv";
 
+                if (File.Exists(path))
+                {
+                    // Create a file to write to.
+                    using (StreamReader sr = File.OpenText(path))
+                    {
+                        string currentLine = "";
+                        while ((currentLine = sr.ReadLine()) != null && currentLine != "")
+                        {
+                            string[] items = currentLine.Split(',');
+                            classList.Add(new ClassRoom(items[0], items[1], items[2]));
+                        }
+
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -163,10 +188,18 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void CreateClass_Click(object sender, RoutedEventArgs e)
         {
-            var createWindow = new CreateClass.CreateClass(classList);
-            createWindow.ShowDialog();
-            SaveClassList();
-            classComboBox.SelectedIndex = classComboBox.Items.Count - 1;
+            try
+            {
+                var createWindow = new CreateClass.CreateClass(classList);
+                createWindow.ShowDialog();
+                SaveClassList();
+                classComboBox.SelectedIndex = classComboBox.Items.Count - 1;
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -176,47 +209,55 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void RunChecks(object sender, RoutedEventArgs e)
         {
-            assignTextBox.Background = Brushes.White;
-            UnitTestLocationBox.Background = Brushes.White;
-            RepoFolderBox.Background = Brushes.White;
-            SecurityKeyBox.Background = Brushes.White;
-
-            //Data validation
-            if (classComboBox.SelectedValue == null ||
-                classComboBox.SelectedValue.ToString() == "")
+            try
             {
-                MessageBoxResult result = MessageBox.Show("Please select or create a class");
-                return;
-            }
-            if (assignTextBox.Text == null || assignTextBox.Text == "")
-            {
-                assignTextBox.Background = Brushes.Red;
-                return;
-            }
-            if (UnitTestLocationBox.Text == null || UnitTestLocationBox.Text == "")
-            {
-                UnitTestLocationBox.Background = Brushes.Red;
-                return;
-            }
-            if (RepoFolderBox.Text == null || RepoFolderBox.Text == "")
-            {
-                RepoFolderBox.Background = Brushes.Red;
-                return;
-            }
-            if (SecurityKeyBox.Text == null || SecurityKeyBox.Text == "")
-            {
-                SecurityKeyBox.Background = Brushes.Red;
-                return;
-            }
-            
+                assignTextBox.Background = Brushes.White;
+                UnitTestLocationBox.Background = Brushes.White;
+                RepoFolderBox.Background = Brushes.White;
+                SecurityKeyBox.Background = Brushes.White;
+
+                //Data validation
+                if (classComboBox.SelectedValue == null ||
+                    classComboBox.SelectedValue.ToString() == "")
+                {
+                    MessageBoxResult result = MessageBox.Show("Please select or create a class");
+                    return;
+                }
+                if (assignTextBox.Text == null || assignTextBox.Text == "")
+                {
+                    assignTextBox.Background = Brushes.Red;
+                    return;
+                }
+                if (UnitTestLocationBox.Text == null || UnitTestLocationBox.Text == "")
+                {
+                    UnitTestLocationBox.Background = Brushes.Red;
+                    return;
+                }
+                if (RepoFolderBox.Text == null || RepoFolderBox.Text == "")
+                {
+                    RepoFolderBox.Background = Brushes.Red;
+                    return;
+                }
+                if (SecurityKeyBox.Text == null || SecurityKeyBox.Text == "")
+                {
+                    SecurityKeyBox.Background = Brushes.Red;
+                    return;
+                }
 
 
-            string useKey = currentUser.UserName + ":" + currentUser.Password;
 
-            Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
-                            useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
+                string useKey = currentUser.UserName + ":" + currentUser.Password;
 
-            studentFilesList.Items.Refresh();
+                Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
+                                useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);
+
+                studentFilesList.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -226,15 +267,23 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if ((ClassRoom)classComboBox.SelectedItem != null)
+            try
             {
-                studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+                if ((ClassRoom)classComboBox.SelectedItem != null)
+                {
+                    studentFilesList.ItemsSource = ((ClassRoom)classComboBox.SelectedItem).Students;
+                }
+                else
+                {
+                    studentFilesList.ItemsSource = null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                studentFilesList.ItemsSource = null;
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
-            
+
         }
 
         /// <summary>
@@ -244,9 +293,17 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void CreateLoginWindow(object sender, RoutedEventArgs e)
         {
-            LoginWindow createWindow = new LoginWindow();
-            createWindow.Owner = this;
-            createWindow.ShowDialog();
+            try
+            {
+                LoginWindow createWindow = new LoginWindow();
+                createWindow.Owner = this;
+                createWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -257,12 +314,18 @@ namespace ACES_GUI
         /// <param name="password"></param>
         internal void SetUser(string userName, string password)
         {
-            currentUser = new UserInfo(userName, password);
-            createClassButton.Visibility = Visibility.Visible;
-            checkFilesButton.Visibility = Visibility.Visible;
-            deleteClassBtn.Visibility = Visibility.Visible;
-
-
+            try
+            {
+                currentUser = new UserInfo(userName, password);
+                createClassButton.Visibility = Visibility.Visible;
+                checkFilesButton.Visibility = Visibility.Visible;
+                deleteClassBtn.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -272,11 +335,19 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void BrowseForUnitTest(object sender, RoutedEventArgs e)
         {
-            FileDialog dialog = new OpenFileDialog();
+            try
+            {
+                FileDialog dialog = new OpenFileDialog();
 
-            if (dialog.ShowDialog() == true)
-            { 
-                UnitTestLocationBox.Text = dialog.FileName;
+                if (dialog.ShowDialog() == true)
+                {
+                    UnitTestLocationBox.Text = dialog.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -287,22 +358,30 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void BrowseForRepoFolder(object sender, RoutedEventArgs e)
         {
-            var dlg = new CommonOpenFileDialog();
-            dlg.Title = "My Title";
-            dlg.IsFolderPicker = true;
-
-            dlg.AddToMostRecentlyUsedList = false;
-            dlg.AllowNonFileSystemItems = false;
-            dlg.EnsureFileExists = true;
-            dlg.EnsurePathExists = true;
-            dlg.EnsureReadOnly = false;
-            dlg.EnsureValidNames = true;
-            dlg.Multiselect = false;
-            dlg.ShowPlacesList = true;
-
-            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            try
             {
-                RepoFolderBox.Text = dlg.FileName;
+                var dlg = new CommonOpenFileDialog();
+                dlg.Title = "My Title";
+                dlg.IsFolderPicker = true;
+
+                dlg.AddToMostRecentlyUsedList = false;
+                dlg.AllowNonFileSystemItems = false;
+                dlg.EnsureFileExists = true;
+                dlg.EnsurePathExists = true;
+                dlg.EnsureReadOnly = false;
+                dlg.EnsureValidNames = true;
+                dlg.Multiselect = false;
+                dlg.ShowPlacesList = true;
+
+                if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    RepoFolderBox.Text = dlg.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
 
         }
@@ -314,8 +393,16 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void DelClass_Click(object sender, RoutedEventArgs e)
         {
-            classList.Remove((ClassRoom)classComboBox.SelectedItem);
-            classComboBox.ItemsSource = classList;
+            try
+            {
+                classList.Remove((ClassRoom)classComboBox.SelectedItem);
+                classComboBox.ItemsSource = classList;
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -325,9 +412,36 @@ namespace ACES_GUI
         /// <param name="e"></param>
         private void Row_DoubleClick (object sender, RoutedEventArgs e)
         {
-            Student temp = (Student) studentFilesList.SelectedItem;
-            StudentDetails details = new StudentDetails(temp);
-            details.ShowDialog();
+            try
+            {
+                Student temp = (Student)studentFilesList.SelectedItem;
+                StudentDetails details = new StudentDetails(temp);
+                details.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handle the error.
+        /// </summary>
+        /// <param name="sClass">The class in which the error occurred in.</param>
+        /// <param name="sMethod">The method in which the error occurred in.</param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                //Would write to a file or database here.
+                MessageBox.Show(sClass + "." + sMethod + " -> " + sMessage);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
+            }
         }
     }
 }

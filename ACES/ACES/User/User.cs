@@ -40,16 +40,24 @@ namespace ACES
         /// <returns>Ignore return, it is for async</returns>
         async public Task TestLogin()
         {
-            GitHubClient client = new GitHubClient(new ProductHeaderValue("ACES"));
-
-            client.Credentials = new Credentials(UserName, Password);
             try
             {
-                User userToGet = await client.User.Get(UserName);
+                GitHubClient client = new GitHubClient(new ProductHeaderValue("ACES"));
+
+                client.Credentials = new Credentials(UserName, Password);
+                try
+                {
+                    User userToGet = await client.User.Get(UserName);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
             }
         }
     }

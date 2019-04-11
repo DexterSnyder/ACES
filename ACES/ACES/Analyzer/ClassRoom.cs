@@ -72,25 +72,33 @@ namespace ACES
         /// </summary>
         public void GetStudentsFromRoster()
         {
-            StreamReader sr = new StreamReader(RosterLocation);
-            // read the fiirst linw which is just a key. 
-            string input = sr.ReadLine();
-            // read the first data line. 
-            input = sr.ReadLine();
-
-            while (input != null)
+            try
             {
-                // split the line into a list of items 
-                string[] line = input.Split(',');
-
-                // only input students that have connected to github classroom 
-                if (line[1].Trim('"') != "")
-                {
-                    // get the student username and id set by the teacher. 
-                    Students.Add(new Student(line[0].Trim('"'), line[1].Trim('"')));
-                }
-                //Read the next line
+                StreamReader sr = new StreamReader(RosterLocation);
+                // read the fiirst linw which is just a key. 
+                string input = sr.ReadLine();
+                // read the first data line. 
                 input = sr.ReadLine();
+
+                while (input != null)
+                {
+                    // split the line into a list of items 
+                    string[] line = input.Split(',');
+
+                    // only input students that have connected to github classroom 
+                    if (line[1].Trim('"') != "")
+                    {
+                        // get the student username and id set by the teacher. 
+                        Students.Add(new Student(line[0].Trim('"'), line[1].Trim('"')));
+                    }
+                    //Read the next line
+                    input = sr.ReadLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
             }
         }
 
@@ -102,8 +110,16 @@ namespace ACES
         /// <param name="userkey"></param>
         public void CloneStudentRepositorys (string assignmentName, string targetFolder, string userkey)
         {
-            //broke this out to preserve proper layer architeture 
-            git.CloneStudentRepositorys(assignmentName, targetFolder, userkey, Students, NameOfOrganization);
+            try
+            {
+                //broke this out to preserve proper layer architeture 
+                git.CloneStudentRepositorys(assignmentName, targetFolder, userkey, Students, NameOfOrganization);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
