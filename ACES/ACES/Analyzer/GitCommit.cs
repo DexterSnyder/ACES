@@ -64,56 +64,65 @@ namespace ACES
         /// <param name="author">Commit author</param>
         /// <param name="linechanges">Which lines were changed</param>
         public void PopulateDataFields(string date, string message, string author, string linechanges)
-        {  // " 1 file changed, 3 insertions(+), 1 deletion(-)"
-            CultureInfo provider = CultureInfo.InvariantCulture;
-            if (date.Substring(5).Trim().Split()[2].Length == 1)
+        {
+            try
             {
-                CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM d HH:mm:ss yyyy zzz", provider);
-            }
-            else
-            {
-                CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM dd HH:mm:ss yyyy zzz", provider);
-            }
-            
-
-            string[] splitAuthor = author.Split();
-
-            Author = splitAuthor[1];
-
-            string[] splitmessage = message.Split('-');
-
-            string[] splitLineChanges = linechanges.Split(',');
-
-            if (splitLineChanges[0] != "")
-            {
-                FilesChanged = Int32.Parse(splitLineChanges[0].Split()[1]);
-
-                if (splitLineChanges[1].Contains("insertions"))
+                // " 1 file changed, 3 insertions(+), 1 deletion(-)"
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                if (date.Substring(5).Trim().Split()[2].Length == 1)
                 {
-                    LinesInserted = Int32.Parse(splitLineChanges[1].Split()[1]);
-
-                    if (splitLineChanges.Length == 3)
-                    {
-                        LinesDeleted = Int32.Parse(splitLineChanges[2].Split()[1]);
-                    }
+                    CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM d HH:mm:ss yyyy zzz", provider);
                 }
                 else
                 {
-                    int LinesDeleted = Int32.Parse(splitLineChanges[1].Split()[1]);
+                    CommitDateTime = DateTime.ParseExact(date.Substring(5).Trim(), "ddd MMM dd HH:mm:ss yyyy zzz", provider);
                 }
-            }
 
-            try
-            {
-                splitmessage[0].TrimEnd();
-                CommitMessageDateTime = DateTime.ParseExact(splitmessage[0].Trim(), "ddd MMM dd HH:mm:ss yyyy", provider);
 
-                Compiler = splitmessage[1];
+                string[] splitAuthor = author.Split();
+
+                Author = splitAuthor[1];
+
+                string[] splitmessage = message.Split('-');
+
+                string[] splitLineChanges = linechanges.Split(',');
+
+                if (splitLineChanges[0] != "")
+                {
+                    FilesChanged = Int32.Parse(splitLineChanges[0].Split()[1]);
+
+                    if (splitLineChanges[1].Contains("insertions"))
+                    {
+                        LinesInserted = Int32.Parse(splitLineChanges[1].Split()[1]);
+
+                        if (splitLineChanges.Length == 3)
+                        {
+                            LinesDeleted = Int32.Parse(splitLineChanges[2].Split()[1]);
+                        }
+                    }
+                    else
+                    {
+                        int LinesDeleted = Int32.Parse(splitLineChanges[1].Split()[1]);
+                    }
+                }
+
+                try
+                {
+                    splitmessage[0].TrimEnd();
+                    CommitMessageDateTime = DateTime.ParseExact(splitmessage[0].Trim(), "ddd MMM dd HH:mm:ss yyyy", provider);
+
+                    Compiler = splitmessage[1];
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex);
+                    Compiler = "not automatic message";
+                }
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
-                Compiler = "not automatic message";
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
             }
         }
 

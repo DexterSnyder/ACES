@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,31 +48,39 @@ namespace ACES
         /// <param name="student">The student to display</param>
         public void DisplayStudent(Student student)
         {
-            //Set the ListBox
-            List<string> temp = student.getReasonsWhy();
-            ReasonsWhy.ItemsSource = temp;
+            try
+            {
+                //Set the ListBox
+                List<string> temp = student.getReasonsWhy();
+                ReasonsWhy.ItemsSource = temp;
 
-            //Calculate the time. Integer division is done intentionally
-            int seconds = (int)student.AvgTimeBetweenCommits;
-            int days = seconds / 86400;
-            seconds = seconds % 86400;
-            int hours = seconds / 3600;
-            seconds = seconds % 3600;
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
+                //Calculate the time. Integer division is done intentionally
+                int seconds = (int)student.AvgTimeBetweenCommits;
+                int days = seconds / 86400;
+                seconds = seconds % 86400;
+                int hours = seconds / 3600;
+                seconds = seconds % 3600;
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
 
-            //set the GUI controls
-            AvgTimeBetweenCommitsValue.Content = days + ":" + hours
-                + ":" + minutes + ":" + seconds;
+                //set the GUI controls
+                AvgTimeBetweenCommitsValue.Content = days + ":" + hours
+                    + ":" + minutes + ":" + seconds;
 
-            StudentNameLabel.Content = student.Name;
-            TotalNumCommitsValue.Content = student.NumStudentCommits;
-            StdDevCommitsValue.Content = student.StdDev;
-            RatingValue.Content = student.Rating;
-            YellowMarksValue.Content = student.YellowMarks;
-            AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits;
-            ScoreValue.Content = student.StudentScore.NumberCorrect + " / " + 
-                (student.StudentScore.NumberCorrect + student.StudentScore.NumberIncorrect);
+                StudentNameLabel.Content = student.Name;
+                TotalNumCommitsValue.Content = student.NumStudentCommits;
+                StdDevCommitsValue.Content = student.StdDev;
+                RatingValue.Content = student.Rating;
+                YellowMarksValue.Content = student.YellowMarks;
+                AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits;
+                ScoreValue.Content = student.StudentScore.NumberCorrect + " / " +
+                    (student.StudentScore.NumberCorrect + student.StudentScore.NumberIncorrect);
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
@@ -81,7 +90,34 @@ namespace ACES
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                            MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handle the error.
+        /// </summary>
+        /// <param name="sClass">The class in which the error occurred in.</param>
+        /// <param name="sMethod">The method in which the error occurred in.</param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                //Would write to a file or database here.
+                MessageBox.Show(sClass + "." + sMethod + " -> " + sMessage);
+            }
+            catch (Exception ex)
+            {
+                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
+                                             "HandleError Exception: " + ex.Message);
+            }
         }
     }
 }
