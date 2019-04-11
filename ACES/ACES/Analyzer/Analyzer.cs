@@ -133,6 +133,7 @@ namespace ACES
 
                 //Make sure that they have run the program, and 
                 //that the author doesn't switch mid work
+                //IF YOU CHANGE THE CPP GIT COMMIT CODE SO THAT THE AUTHOR ISN'T Default, YOU WILL HAVE TO CHANGE THIS
                 bool tempAuthorFlag = false;
                 if (commit.Author == "Default")
                 {
