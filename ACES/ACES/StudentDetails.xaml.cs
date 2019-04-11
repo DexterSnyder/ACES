@@ -69,6 +69,7 @@ namespace ACES
             StdDevCommitsValue.Content = student.StdDev;
             RatingValue.Content = student.Rating;
             YellowMarksValue.Content = student.YellowMarks;
+            AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits;
             ScoreValue.Content = student.StudentScore.NumberCorrect + " / " + 
                 (student.StudentScore.NumberCorrect + student.StudentScore.NumberIncorrect);
         }

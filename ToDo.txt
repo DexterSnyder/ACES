@@ -1,0 +1,9 @@
+-Modifiy the .cpp portion to get the username from the OS instead of using "Default"
+	-Modify logic in Analyzer so that is is not looking for "Default"
+-Run the Moss tool and display results
+-Run compilers other than Visual Studio on the instructors side
+	-Try VS first, then GCC, and so forth
+-Allow GUI to dynamicly resize
+-Figure out why you can't have # signs in your GitHub password
+-Try and make this a web based service- good luck with a FERPA server, talk to Brad
+	-The front and back end interface is in Analyzer

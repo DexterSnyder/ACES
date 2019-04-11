@@ -16,6 +16,11 @@ namespace ACES.UserLogin
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Tests to make sure that the GitHub user name and password are correct
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void TestPassword(object sender, RoutedEventArgs e)
         {
             

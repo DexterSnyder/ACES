@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace ACES
 {
+    /// <summary>
+    /// Represents a Git Commit object
+    /// </summary>
     public class GitCommit
     {
         /// <summary>

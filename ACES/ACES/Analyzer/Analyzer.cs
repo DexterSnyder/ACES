@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 namespace ACES
 {
 
+    /// <summary>
+    /// Main buisness logic class that runs the analysis
+    /// </summary>
     class Analyzer
     {
         /// <summary>
@@ -38,8 +41,6 @@ namespace ACES
         /// <summary>
         /// This is the main method the runs the analyzer
         /// </summary>
-        /// <param name="nameOfOrgansation">Name of the GitHub Organization</param>
-        /// <param name="rosterLocation">File location of the roster. Must be CSV</param>
         /// <param name="assignmentName">Name of the assigment</param>
         /// <param name="targetFolder">The folder to save student projects</param>
         /// <param name="userkey">User key for GitHub</param>

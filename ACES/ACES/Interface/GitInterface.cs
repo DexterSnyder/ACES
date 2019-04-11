@@ -6,6 +6,9 @@ using System.IO;
 
 namespace ACES
 {
+    /// <summary>
+    /// GitHub interface. Contains methods to interact with GitHub and GitHub classroom
+    /// </summary>
     public class GitInterface
     {
         
