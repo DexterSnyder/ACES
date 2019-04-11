@@ -93,7 +93,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding avgTimeBetweenCommits}" Header="Avg Time Between Commits">
+                <DataGridTextColumn Binding="{Binding AvgTimeBetweenCommits}" Header="Avg Time Between Commits">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -101,7 +101,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding stdDev}" Header="Standard Deviation">
+                <DataGridTextColumn Binding="{Binding StdDev}" Header="Standard Deviation">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />

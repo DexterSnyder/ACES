@@ -8,6 +8,9 @@ using System.Collections.ObjectModel;
 namespace ACES
 {
 
+    /// <summary>
+    /// Represents a GitHub classroom object
+    /// </summary>
     public class ClassRoom
     {
         /// <summary>

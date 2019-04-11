@@ -211,7 +211,7 @@ namespace ACES_GUI
             
 
 
-            string useKey = currentUser.userName + ":" + currentUser.password;
+            string useKey = currentUser.UserName + ":" + currentUser.Password;
 
             Analyze.run((ClassRoom)classComboBox.SelectedItem, assignTextBox.Text, RepoFolderBox.Text,
                             useKey, UnitTestLocationBox.Text, SecurityKeyBox.Text);

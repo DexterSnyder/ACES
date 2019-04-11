@@ -9,6 +9,9 @@ using System.IO;
 
 namespace ACES
 {
+    /// <summary>
+    /// This class interfaces with the operating system command line
+    /// </summary>
     public class SystemInterface
     {
         /// <summary>

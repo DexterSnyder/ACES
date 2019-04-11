@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ACES
 {
+    /// <summary>
+    /// Small data structure to hold a students score
+    /// </summary>
     public class Score
     {
         /// <summary>

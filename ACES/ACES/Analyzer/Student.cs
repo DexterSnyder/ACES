@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ACES
 {
     /// <summary>
-    /// class to old the students after being pulled from the site.
+    /// Each object represents one student
     /// </summary>
     public class Student
     {
