@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -92,8 +93,8 @@ namespace ACES
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
-                                             "HandleError Exception: " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "."
+                    + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }//run
 
@@ -112,8 +113,8 @@ namespace ACES
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
-                                             "HandleError Exception: " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "."
+                    + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
 
             return CurrentClass.Students;
@@ -251,8 +252,8 @@ namespace ACES
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
-                                             "HandleError Exception: " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "."
+                    + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         } //void analyze(Student student)
 
@@ -280,8 +281,8 @@ namespace ACES
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
-                                             "HandleError Exception: " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "."
+                    + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
             return avg;
         }
