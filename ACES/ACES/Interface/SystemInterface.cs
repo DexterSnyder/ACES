@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using System.Reflection;
 
 namespace ACES
 {
@@ -125,8 +126,8 @@ namespace ACES
             }
             catch (Exception ex)
             {
-                System.IO.File.AppendAllText("C:\\Error.txt", Environment.NewLine +
-                                             "HandleError Exception: " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "."
+                    + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
             return tempScore;
         }//build assignment

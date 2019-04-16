@@ -69,7 +69,7 @@ namespace ACES
 
                 StudentNameLabel.Content = student.Name;
                 TotalNumCommitsValue.Content = student.NumStudentCommits;
-                StdDevCommitsValue.Content = student.StdDev;
+                StdDevCommitsValue.Content = student.StdDev.ToString("0,0.00");
                 HighCommitValue.Content = student.Max;
                 LowCommitValue.Content = student.Min;
                 RatingValue.Content = student.Rating;
