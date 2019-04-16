@@ -7,3 +7,4 @@
 -Figure out why you can't have # signs in your GitHub password
 -Try and make this a web based service- good luck with a FERPA server, talk to Brad
 	-The front and back end interface is in Analyzer
+-Allow some of the buisness logic numbers (# of commits for yellow/red) to be set in a config file
