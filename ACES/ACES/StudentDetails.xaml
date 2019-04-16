@@ -7,13 +7,17 @@
         mc:Ignorable="d"
         Title="StudentDetails" Height="522.5" Width="452.556">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="71*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="242*"/>
             <ColumnDefinition Width="180*"/>
             <ColumnDefinition Width="12*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="StudentNameLabel" Content="Student"  HorizontalContentAlignment="Center" Margin="1.667,10,1.333,0" VerticalAlignment="Top" Height="45" FontSize="24" Background="#FF3F5BDB" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Column="1">
+        <Label x:Name="StudentNameLabel" Content="Student"  HorizontalContentAlignment="Center" Margin="2,10,1,0" VerticalAlignment="Top" Height="45" FontSize="24" Background="#FF3F5BDB" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Column="1">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -23,20 +27,24 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="AvgTimeBetweenCommitsLabel" Content="Average Time Between Commits" HorizontalAlignment="Left" Margin="2.667,77,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="239" Grid.Column="1"/>
-        <Label x:Name="AvgTimeBetweenCommitsValue" Content="0" HorizontalAlignment="Left" Margin="1.667,77,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Grid.Column="2" Height="31"/>
-        <Label x:Name="TotalNumCommitsLable" Content="Total Number of Commits" HorizontalAlignment="Left" Margin="2.667,108,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="192" Grid.Column="1"/>
-        <Label x:Name="TotalNumCommitsValue" Content="0" HorizontalAlignment="Left" Margin="0.667,108,0,0" VerticalAlignment="Top" Width="52" FontSize="16" Grid.Column="2" Height="31"/>
-        <Label x:Name="RatingLabel" Content="Rating" HorizontalAlignment="Left" Margin="2.667,201,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="56" Grid.Column="1"/>
-        <Label x:Name="RatingValue" Content="0"  HorizontalAlignment="Left" Margin="0.667,201,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Height="31" Grid.Column="2"/>
-        <Label x:Name="YellowMarksLabel" Content="Yellow Marks" HorizontalAlignment="Left" Margin="2.667,232,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="103" Grid.Column="1"/>
-        <Label x:Name="YellowMarksValue" Content="0" HorizontalAlignment="Left" Margin="0.667,232,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.19,0.423" FontSize="16" Height="31" Grid.Column="2"/>
-        <Label x:Name="ScoreValue" Content="0" HorizontalAlignment="Left" Margin="0.667,170,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Height="31" Grid.Column="2"/>
-        <Label x:Name="ScoreLabel" Content="Score" HorizontalAlignment="Left" Margin="1.667,170,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="49" Grid.Column="1"/>
-        <Label x:Name="StdDevCommitsLabel" Content="Std Dev Between Commits" HorizontalAlignment="Left" Margin="2.667,139,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="197" Grid.Column="1"/>
-        <Label x:Name="StdDevCommitsValue" Content="0" HorizontalAlignment="Left" Margin="1.667,134,0,0" VerticalAlignment="Top" Width="49" FontSize="16" Grid.Column="2" Height="31"/>
-        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="105.667,463,0,0" VerticalAlignment="Top" Width="75" Click="CloseButton_Click" Grid.Column="2" Height="20" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="ReasonsWhy" HorizontalAlignment="Left" Height="154" Margin="2.667,280,0,0" VerticalAlignment="Top" Width="419" FontSize="16" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label x:Name="AvgTimeBetweenCommitsLabel" Content="Average Time Between Commits" HorizontalAlignment="Left" Margin="0,42,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="239" Grid.Column="1"/>
+        <Label x:Name="AvgTimeBetweenCommitsValue" Content="0" HorizontalAlignment="Left" Margin="0,42,0,0" VerticalAlignment="Top" Width="128" FontSize="16" Grid.Column="2" Height="31"/>
+        <Label x:Name="TotalNumCommitsLable" Content="Total Number of Commits" HorizontalAlignment="Left" Margin="0,73,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="192" Grid.Column="1"/>
+        <Label x:Name="TotalNumCommitsValue" Content="0" HorizontalAlignment="Left" Margin="0,73,0,0" VerticalAlignment="Top" Width="52" FontSize="16" Grid.Column="2" Height="31" RenderTransformOrigin="1.154,0.484"/>
+        <Label x:Name="RatingLabel" Content="Rating" HorizontalAlignment="Left" Margin="0,227,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="56" Grid.Column="1"/>
+        <Label x:Name="RatingValue" Content="0"  HorizontalAlignment="Left" Margin="0,227,0,0" Width="80" FontSize="16" Grid.Column="2" Height="31" VerticalAlignment="Top"/>
+        <Label x:Name="YellowMarksLabel" Content="Yellow Marks" HorizontalAlignment="Left" Margin="0,258,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="103" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label x:Name="YellowMarksValue" Content="0" HorizontalAlignment="Left" Margin="0,258,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="0.19,0.423" FontSize="16" Height="31" Grid.Column="2" Grid.RowSpan="2"/>
+        <Label x:Name="ScoreValue" Content="0" HorizontalAlignment="Left" Margin="0,196,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Height="31" Grid.Column="2"/>
+        <Label x:Name="ScoreLabel" Content="Score" HorizontalAlignment="Left" Margin="0,196,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="49" Grid.Column="1"/>
+        <Label x:Name="StdDevCommitsLabel" Content="Std Dev Between Commits" HorizontalAlignment="Left" Margin="0,104,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="197" Grid.Column="1"/>
+        <Label x:Name="StdDevCommitsValue" Content="0" HorizontalAlignment="Left" Margin="0,104,0,0" VerticalAlignment="Top" Width="138" FontSize="16" Grid.Column="2" Height="31"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="97,183,0,0" VerticalAlignment="Top" Width="75" Click="CloseButton_Click" Grid.Column="2" Height="20" Grid.Row="1"/>
+        <ListBox x:Name="ReasonsWhy" HorizontalAlignment="Left" Height="154" Margin="3,0,0,49" VerticalAlignment="Bottom" Width="419" FontSize="16" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="HighLable" Content="High time between Commits " HorizontalAlignment="Left" Margin="0,134,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="215" Grid.Column="1"/>
+        <Label x:Name="LowLable" Content="Low time between Commits " HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" FontSize="16" Height="31" Width="215" Grid.Column="1"/>
+        <Label x:Name="HighCommitValue" Content="0" HorizontalAlignment="Left" Margin="0,134,0,0" VerticalAlignment="Top" Width="138" FontSize="16" Grid.Column="2" Height="31"/>
+        <Label x:Name="LowCommitValue" Content="0" HorizontalAlignment="Left" Margin="0,165,0,0" VerticalAlignment="Top" Width="138" FontSize="16" Grid.Column="2" Height="31"/>
 
     </Grid>
 </Window>

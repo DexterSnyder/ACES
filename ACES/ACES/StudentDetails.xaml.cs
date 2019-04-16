@@ -70,6 +70,8 @@ namespace ACES
                 StudentNameLabel.Content = student.Name;
                 TotalNumCommitsValue.Content = student.NumStudentCommits;
                 StdDevCommitsValue.Content = student.StdDev;
+                HighCommitValue.Content = student.Max;
+                LowCommitValue.Content = student.Min;
                 RatingValue.Content = student.Rating;
                 YellowMarksValue.Content = student.YellowMarks;
                 AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits;
