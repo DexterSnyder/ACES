@@ -70,11 +70,11 @@ namespace ACES
                 StudentNameLabel.Content = student.Name;
                 TotalNumCommitsValue.Content = student.NumStudentCommits;
                 StdDevCommitsValue.Content = student.StdDev.ToString("0,0.00");
-                HighCommitValue.Content = student.Max;
-                LowCommitValue.Content = student.Min;
+                HighCommitValue.Content = student.Max.ToString("0,0.00");
+                LowCommitValue.Content = student.Min.ToString("0,0.00");
                 RatingValue.Content = student.Rating;
                 YellowMarksValue.Content = student.YellowMarks;
-                AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits;
+                AvgTimeBetweenCommitsValue.Content = student.AvgTimeBetweenCommits.ToString("0,0.00");
                 ScoreValue.Content = student.StudentScore.NumberCorrect + " / " +
                     (student.StudentScore.NumberCorrect + student.StudentScore.NumberIncorrect);
             }
