@@ -51,6 +51,11 @@ namespace ACES
                             {
                                 rating = "Red";
                             }
+                            else
+                            {
+
+                            }
+                            rating = "Yellow";
                         }
                         break;
 
